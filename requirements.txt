@@ -1,0 +1,6 @@
+numpy
+notebook
+jupytext
+rise
+sphinx
+myst-nb
