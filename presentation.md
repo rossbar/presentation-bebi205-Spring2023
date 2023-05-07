@@ -144,7 +144,7 @@ parse_kwargs = {
 }
 
 data = {
-    ff.name : np.loadtxt(ff, **parse_kwargs) for ff in gt_data_path.iterdir()
+    ff.name[:-4] : np.loadtxt(ff, **parse_kwargs) for ff in gt_data_path.iterdir()
 }
 ```
 
@@ -188,6 +188,3 @@ ax.set_ylabel('Relative Popularity of Search Term [arb]')
 ax.legend();
 ```
 
-```{code-cell} ipython3
-
-```
