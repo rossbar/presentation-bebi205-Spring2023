@@ -23,3 +23,44 @@ kernelspec:
 #### Ross Barnowski, [@rossbar](https://github.com/rossbar) on GitHub
 
 </center>
+
++++ {"slideshow": {"slide_type": "slide"}}
+
+# Why NumPy?
+
+- `ndarray`: A generic, n-dimensional array data structure
+  * Fundamental data structure underlying the *Scientific Python Ecosystem*
+
++++ {"slideshow": {"slide_type": "subslide"}}
+
+<center>
+
+## The Scientific Python Ecosystem
+
+<img src="images/scientific_python_ecosystem.png" alt="scientific_python_ecosystem" width=40%/>
+
+</center>
+
+Image credit: Jarrod Millman et. al. - [Array programming with NumPy][numpy-paper]
+
+[numpy-paper]: https://www.nature.com/articles/s41586-020-2649-2
+
++++ {"slideshow": {"slide_type": "slide"}}
+
+# A Bit of History
+
+- **Mid 90's/Early 00's**: desire for high-performance numerical computation in
+  Python culminates in the `Numeric` [(pdf)][numeric-manual] library.
+- Early adopters included the [Space Telescope Science Institute (STScI)][stsci]
+  who adapted Numeric to better suit their needs: `NumArray`.
+- **2005** The best ideas from `Numeric` and `NumArray` were combined in the
+  development of a new library: `NumPy`
+   * Originally `scipy.core` rather than a standalone library.
+   * This work was largely done by [Travis Oliphant][travis-gh],
+     then an assistant professor at BYU.
+- **2006** NumPy v1.0 released in October
+
+
+[numeric-manual]: https://numpy.org/_downloads/768fa66c250a0335ad3a6a30fae48e34/numeric-manual.pdf
+[stsci]: http://www.stsci.edu/
+[travis-gh]: https://github.com/teoliphant
