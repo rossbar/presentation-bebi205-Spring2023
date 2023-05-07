@@ -49,18 +49,30 @@ Image credit: Jarrod Millman et. al. - [Array programming with NumPy][numpy-pape
 
 # A Bit of History
 
++++ {"slideshow": {"slide_type": "fragment"}}
+
 - **Mid 90's/Early 00's**: desire for high-performance numerical computation in
   Python culminates in the `Numeric` [(pdf)][numeric-manual] library.
+
+[numeric-manual]: https://numpy.org/_downloads/768fa66c250a0335ad3a6a30fae48e34/numeric-manual.pdf
+
++++ {"slideshow": {"slide_type": "fragment"}}
+
 - Early adopters included the [Space Telescope Science Institute (STScI)][stsci]
   who adapted Numeric to better suit their needs: `NumArray`.
+
+[stsci]: http://www.stsci.edu/
+
++++ {"slideshow": {"slide_type": "fragment"}}
+
 - **2005** The best ideas from `Numeric` and `NumArray` were combined in the
   development of a new library: `NumPy`
    * Originally `scipy.core` rather than a standalone library.
    * This work was largely done by [Travis Oliphant][travis-gh],
      then an assistant professor at BYU.
-- **2006** NumPy v1.0 released in October
 
-
-[numeric-manual]: https://numpy.org/_downloads/768fa66c250a0335ad3a6a30fae48e34/numeric-manual.pdf
-[stsci]: http://www.stsci.edu/
 [travis-gh]: https://github.com/teoliphant
+
++++ {"slideshow": {"slide_type": "fragment"}}
+
+- **2006** NumPy v1.0 released in October
