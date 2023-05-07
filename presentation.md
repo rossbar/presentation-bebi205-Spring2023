@@ -118,6 +118,8 @@ slideshow:
   slide_type: fragment
 ---
 # Data downloaded from google trends on 05-07-2023
+# Each term downloaded individually; time window = 09/01/2010 - 05/07-2023;
+# NOTE: Data from US only (Google trends default)
 gt_data_path = Path.cwd() / "data/google_trends"
 print([f.name for f in gt_data_path.iterdir()])
 ```
@@ -188,3 +190,28 @@ ax.set_ylabel('Relative Popularity of Search Term [arb]')
 ax.legend();
 ```
 
++++ {"slideshow": {"slide_type": "subslide"}}
+
+## Takeaways
+
++++ {"slideshow": {"slide_type": "fragments"}}
+
+- From this *very non-rigorous* analysis, it's not unreasonable to think that
+  a greater fraction are driven by interests in data science/machine learning
+
++++ {"slideshow": {"slide_type": "fragments"}}
+
+- Perhaps greater fraction of new users interacting with NumPy **indirectly**;
+  i.e. in the course of their research, rather than from a ground-up approach
+  to numerical computing.
+
++++ {"slideshow": {"slide_type": "subslide"}}
+
+No matter how you slice[^1] it, a thorough understanding of the n-dimensional
+array data structure is important!
+
+[^1]: Pun absolutely intended
+
+```{code-cell} ipython3
+
+```
