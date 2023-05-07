@@ -12,6 +12,18 @@ kernelspec:
   name: python3
 ---
 
+```{code-cell} ipython3
+---
+slideshow:
+  slide_type: '-'
+---
+import os
+from pathlib import Path
+import numpy as np
+import matplotlib.pyplot as plt
+%matplotlib notebook
+```
+
 +++ {"slideshow": {"slide_type": "slide"}}
 
 <center>

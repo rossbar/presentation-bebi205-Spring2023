@@ -1,5 +1,6 @@
 numpy
-notebook
+matplotlib
+notebook<7  # RISE will likely break with release of nb v7
 jupytext
 rise
 sphinx
