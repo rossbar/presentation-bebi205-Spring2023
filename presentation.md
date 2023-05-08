@@ -212,6 +212,8 @@ array data structure is important!
 
 [^1]: Pun absolutely intended
 
-```{code-cell} ipython3
++++ {"slideshow": {"slide_type": "slide"}}
 
-```
+# NumPy Array at a glance
+
+
