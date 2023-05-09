@@ -242,6 +242,73 @@ Image credit: Jarrod Millman et. al. - [Array programming with NumPy][numpy-pape
 
 +++ {"slideshow": {"slide_type": "slide"}}
 
+# The strided memory model
+
+- Data are stored linearly in computer memory
+
+- NumPy arrays *describe* the data in memory allowing it to be interpreted
+  a multi-dimensional array of elements.
+  * Need to know how to interpret individual elements: `dtype`
+  * Need to map from a multi-dimensional indexing scheme to memory block
+
+- Turns out this requires only a few bits of information:
+  * the number of dimensions and the size of each dimension, i.e. the array `shape`
+  * the number of bytes one needs to "jump" to reach the next element in each
+    dimension: `strides`
+
++++ {"slideshow": {"slide_type": "subslide"}}
+
+## Example
+
+The strided indexing scheme allows us to interpret the memory block as a
+2D array:
+
+```{code-cell} ipython3
+a = np.array([[0, 6, 1], [3, 4, 2]], dtype=np.uint8)
+```
+
+The `.data` attribute points to the underlying data buffer in memory:
+
+```{code-cell} ipython3
+a.data
+```
+
+```{code-cell} ipython3
+# NOTE: for illustrative purposes only, not recommended for user code
+bytes(a.data)
+```
+
+```{code-cell} ipython3
+idx = (1, 2)
+a[idx]
+```
+
++++ {"slideshow": {"slide_type": "subslide"}}
+
+Mapping back to the 1D data buffer:
+
+```{code-cell} ipython3
+a.strides
+```
+
+```{code-cell} ipython3
+idx_1d = a.strides[0] * idx[0] + a.strides[1] * idx[1]
+idx_1d
+```
+
+```{code-cell} ipython3
+bytes(a.data)[idx_1d]
+```
+
++++ {"slideshow": {"slide_type": "fragment"}}
+
+See also [`np.ravel_multi_index`][np-rmi]
+
+[np-rmi]: https://numpy.org/devdocs/reference/generated/numpy.ravel_multi_index.html
+
++++ {"slideshow": {"slide_type": "slide"}}
+
+
 TODO: organize below
 
 +++ {"slideshow": {"slide_type": "slide"}}
