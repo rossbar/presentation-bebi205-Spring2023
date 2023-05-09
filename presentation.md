@@ -216,4 +216,53 @@ array data structure is important!
 
 # NumPy Array at a glance
 
+`ndarray`: a generic, n-dimensional array structure for in-memory,
+homogenously-typed data on CPUs.
+- Supports a wide range of operations for accessing/manipulating data with a
+  concise and expressive syntax.
 
++++ {"slideshow": {"slide_type": "fragments"}}
+
+## Key concepts
+
++++ {"slideshow": {"slide_type": "fragments"}}
+
+- The **strided memory model**
+
++++ {"slideshow": {"slide_type": "fragments"}}
+
+- The two flavors of **indexing**: basic & advanced
+
++++ {"slideshow": {"slide_type": "fragments"}}
+
+- **Vectorization** & **Broadcasting**
+
++++ {"slideshow": {"slide_type": "slide"}}
+
+% Strided memory model
+% - The double-edged sword (e.g. transpose batch/channel)
+% - Tiling
+
+% XArray example: CODEX data
+
+% Advanced indexing
+% Boolean masks!
+% Also indices: 2 examples, point-wise data to grid (neuron example)
+
+% Do's and dont's
+% - no masked array
+% - no matrix
+% - no ragged arrays
+% - Most important: premature optimization is the root of all evil
+%   * The real power of Python is enabling analysts to explore, express, and
+%   * communicate analyses. If you spend all your time worrying about whether
+%   * something is written "well", it defeats the purpose
+%   * Problems/bottlenecks will naturally present themselves with scale. The
+%   * "art" of scientific computing is knowing where they arise (or at least how
+%   * to *investigate* how they arise), and how best to solve them.
+
+% Gotchas
+% - Relying on `base` as an indicator whether or not an array owns memory
+% - Floating point precision
+%   * e.g. `arange` with fp step
+% - Casting esp. int -> float
