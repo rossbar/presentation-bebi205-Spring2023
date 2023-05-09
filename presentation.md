@@ -308,6 +308,118 @@ See also [`np.ravel_multi_index`][np-rmi]
 
 +++ {"slideshow": {"slide_type": "slide"}}
 
+# Contiguous Memory
+
+- A contiguous memory layout is one where there are no gaps between the elements.
+
+- There is a fundamental ambiguity in how the higher-dimensional index is
+  mapped back to 1D
+
+The 1D memory block can either be filled such that the elements in the **rows**
+are adjacent to each other in memory, or such that the elements in the **columns**
+are adjacent.
+
+For historcal reasons related to the `C` and `Fortran` programming languages,
+C-contiguous == row-major and F-contiguous == column-major
+
++++ {"slideshow": {"slide_type": "slide"}}
+
+## Example
+
+Let's say we want to represent the following 2D array:
+
+```python
+[[1, 2, 3],
+ [4, 5, 6],
+ [7, 8, 9]]
+```
+
+```{code-cell}
+---
+slideshow:
+  slide_type: subslide
+---
+x = np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9], dtype=np.uint8, order="C")
+x
+```
+
+```{code-cell}
+x.strides  # Last index "varies the fastest" (smallest stride)
+```
+
+```{code-cell}
+x.tobytes("A")  # order="A" preserves the ordering of the underlying memory buffer
+```
+
+```{code-cell}
+y = np.array(x, order="F")  # Same data stored in a different order
+y
+```
+
+```{code-cell}
+y.strides  # First index "varies the fastest" (smallest stride)
+```
+
+```{code-cell}
+y.tobytes("A")
+```
+
++++ {"slideshow": {"slide_type": "slide"}}
+
+## Question: Is it possible to have memory layouts that are neither F nor C contiguous?
+
+```{code-cell}
+# What do you think?
+```
+
++++ {"slideshow": {"slide_type": "subslide"}}
+
+## Another Question: Is it possible to have non-contiguous memory in 2D?
+
+```{code-cell}
+# You tell me!
+a = np.arange(12).reshape(3, 4)
+a
+```
+
++++ {"slideshow": {"slide_type": "subslide"}}
+
+### Aside
+
+Understanding the strided memory model can help you determine if/when numpy
+will copy data.
+ - NumPy generally tries not to copy data (see e.g. `reshape()`, `ravel()`), but
+   sometimes there is no way to represent the output array with a given shape
+   with only strides + offsets
+
+```{code-cell}
+b = a[1:].ravel()  # Returns a view
+b.base
+```
+
+```{code-cell}
+c = a[:2, 1:3].ravel()  # Copies: no way to represent the raveled data with stride only
+c.base
+```
+
++++ {"slideshow": {"slide_type": "slide"}}
+
+# The power of the strided memory model
+
+- Can represent any regular multidimensional data with only `shape`, and `strides`
+  (and in some cases adjusting the `data` pointer)
+
+- The same memory block can be viewed in different ways *without copying the data*
+  * e.g. reshaping, slicing, transposing
+
+- Can have "virtual" dimensions by using strides of 0 -> **array broadcasting**
+  * Again, can help avoid copying data/allocating temporary arrays
+
++++ {"slideshow": {"slide_type": "fragment"}}
+
+For a more thorough treatment of the strided memory model, see:
+ - [A Guide to NumPy][numpy-book], esp. Ch. 2.3
+ - [Advanced NumPy in the scipy-lecture-notes][sln]
 
 TODO: organize below
 
