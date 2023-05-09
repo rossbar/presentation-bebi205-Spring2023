@@ -239,6 +239,93 @@ homogenously-typed data on CPUs.
 
 +++ {"slideshow": {"slide_type": "slide"}}
 
+
+TODO: organize below
+
++++ {"slideshow": {"slide_type": "slide"}}
+
+# Don't forget about Python's data structures!
+
+- A common pattern amongst users: NumPy is written in C, so it's faster across
+  the board.
+
+- Not so fast: choosing the right data structure is important!
+
++++ {"slideshow": {"slide_type": "subslide"}}
+
+## Trivial example
+
+```{code-cell} ipython3
+rng = np.random.default_rng()
+data = rng.integers(low=0, high=1000, size=int(1e7))
+```
+
+- Now let's say you have a task that involves repeatedly checking whether or not
+  a value is in this dataset. No problem!:
+
+```{code-cell} ipython3
+val = 6000
+val in data
+```
+
+- But wait... this has to search through *all* of `data` to determine whether
+  `val` is present.
+  * We know a-priori that there are duplicate values in our dataset, so we can
+    optimize this task by only searching over *unique* values in `data`.
+
+```{code-cell} ipython3
+uniq_data = np.unique(data)
+val in uniq_data
+```
+
+How much did we improve?
+
+```{code-cell} ipython3
+%timeit -n 1 -r 1 val in data
+```
+
+```{code-cell} ipython3
+%timeit -n 1 -r 1 val in uniq_data
+```
+
+- Great! An optimized implementation, and still readable!
+
+- But wait... IIRC from CS1, membership testing is `O(n)` for lists. Is there
+  a better way?
+
+```{code-cell} ipython3
+set_data = np.unique(data)
+```
+
+```{code-cell} ipython3
+%timeit -n 1 -r 1 val in uniq_data
+```
+
+```{code-cell} ipython3
+%timeit -n 1 -r 1 val in set_data
+```
+
+Cost of construction:
+
+```{code-cell} ipython3
+%timeit -n 1 -r 1 uniq_data = np.unique(data)
+```
+
+```{code-cell} ipython3
+%timeit -n 1 -r 1 set_data = set(data)
+```
+
+## Takeaway
+
+- Binary extensions do not always equal better performance.
+
+- Python has many excellent built-in data structures. Learning to use them
+  together with Scientific Python will improve your code.
+
+- I strongly recommend [Fluent Python][fluent-python]
+
+[fluent-python]: https://www.oreilly.com/library/view/fluent-python-2nd/9781492056348/
+
 % Strided memory model
 % - The double-edged sword (e.g. transpose batch/channel)
 % - Tiling
