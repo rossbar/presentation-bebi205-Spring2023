@@ -110,6 +110,8 @@ Image credit: Jarrod Millman et. al. - [Array programming with NumPy][numpy-pape
      image processing, geoscience, bioinformatics, etc.) end up interacting
      with NumPy indirectly.
 
++++ {"slideshow": {"slide_type": "subslide"}}
+
 ## Google Trends
 
 ```{code-cell} ipython3
@@ -234,8 +236,9 @@ homogenously-typed data on CPUs.
 +++ {"slideshow": {"slide_type": "subslide"}}
 
 <center>
-<img src="images/numpy_features.png" alt="Summary of NumPy array functionality" width=40%/>
+<img src="images/numpy_features.png" alt="Summary of NumPy array functionality"/>
 </center>
+Image credit: Jarrod Millman et. al. - [Array programming with NumPy][numpy-paper]
 
 +++ {"slideshow": {"slide_type": "slide"}}
 
@@ -277,6 +280,8 @@ uniq_data = np.unique(data)
 val in uniq_data
 ```
 
++++ {"slideshow": {"slide_type": "subslide"}}
+
 How much did we improve?
 
 ```{code-cell} ipython3
@@ -293,7 +298,11 @@ How much did we improve?
   a better way?
 
 ```{code-cell} ipython3
-set_data = np.unique(data)
+---
+slideshow:
+  slide_type: subslide
+---
+set_data = set(data)
 ```
 
 ```{code-cell} ipython3
@@ -304,6 +313,8 @@ set_data = np.unique(data)
 %timeit -n 1 -r 1 val in set_data
 ```
 
++++ {"slideshow": {"slide_type": "subslide"}}
+
 Cost of construction:
 
 ```{code-cell} ipython3
@@ -313,6 +324,8 @@ Cost of construction:
 ```{code-cell} ipython3
 %timeit -n 1 -r 1 set_data = set(data)
 ```
+
++++ {"slideshow": {"slide_type": "subslide"}}
 
 ## Takeaway
 
