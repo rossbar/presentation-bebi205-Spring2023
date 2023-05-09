@@ -225,20 +225,19 @@ homogenously-typed data on CPUs.
 
 ## Key concepts
 
-+++ {"slideshow": {"slide_type": "fragments"}}
-
 - The **strided memory model**
-
-+++ {"slideshow": {"slide_type": "fragments"}}
 
 - The two flavors of **indexing**: basic & advanced
 
-+++ {"slideshow": {"slide_type": "fragments"}}
-
 - **Vectorization** & **Broadcasting**
 
-+++ {"slideshow": {"slide_type": "slide"}}
++++ {"slideshow": {"slide_type": "subslide"}}
 
+<center>
+<img src="images/numpy_features.png" alt="Summary of NumPy array functionality" width=40%/>
+</center>
+
++++ {"slideshow": {"slide_type": "slide"}}
 
 TODO: organize below
 
