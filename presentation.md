@@ -421,6 +421,44 @@ For a more thorough treatment of the strided memory model, see:
  - [A Guide to NumPy][numpy-book], esp. Ch. 2.3
  - [Advanced NumPy in the scipy-lecture-notes][sln]
 
++++ {"slideshow": {"slide_type": "slide"}}
+
+# Some caveats
+
+- *Views* make it possible to work with large array data in a memory-efficient
+  way, but there are some tradeoffs
+
++++ {"slideshow": {"slide_type": "subslide"}}
+
+## Contrived example
+
+```{code-cell} ipython3
+a = np.ones((20000,))
+
+step = 128
+b = np.ones((20000 * step,))[::step]
+```
+
+```{code-cell} ipython3
+np.array_equal(a, b)
+```
+
+```{code-cell} ipython3
+%timeit a.sum()
+```
+
+```{code-cell} ipython3
+%timeit b.sum()
+```
+
++++ {"slideshow": {"slide_type": "subslide"}}
+
+## Why?
+
+[Check out the scipy lecture notes!][sli-cpu-cache]
+
+[sli-cpu-cache]: https://scipy-lectures.org/advanced/advanced_numpy/#cpu-cache-effects
+
 TODO: organize below
 
 +++ {"slideshow": {"slide_type": "slide"}}
