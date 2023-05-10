@@ -21,7 +21,7 @@ import os
 from pathlib import Path
 import numpy as np
 import matplotlib.pyplot as plt
-%matplotlib notebook
+%matplotlib inline
 ```
 
 +++ {"slideshow": {"slide_type": "slide"}}
@@ -512,7 +512,7 @@ data_out = np.ascontiguousarray(data_out)  # i.e. no transpose was necessary
 
 [basic-idx]: https://numpy.org/doc/stable/user/basics.indexing.html#basic-indexing
 
-```{code-cell}
+```{code-cell} ipython3
 ---
 slideshow:
   slide_type: subslide
@@ -521,16 +521,16 @@ a = np.arange(12, dtype=int).reshape(2, 2, 3)
 a
 ```
 
-```{code-cell}
+```{code-cell} ipython3
 b = a.reshape(-1)  # Equivalent to ravel()
 ```
 
-```{code-cell}
+```{code-cell} ipython3
 b[3:9] = 100
 a
 ```
 
-```{code-cell}
+```{code-cell} ipython3
 a[-1] = 1000
 b
 ```
@@ -546,9 +546,9 @@ img = tff.imread("data/example_input_combined.tif")
 img.shape
 ```
 
-```{code-cell}
-fig, ax = plt.subplots(1, 2, figsize=(16, 6))
-for a, im, tt in zip(ax.ravel(), img, ("nuclear", "membrane")):
+```{code-cell} ipython3
+fig, ax = plt.subplots(1, 2, figsize=(8, 6))
+for a, im, ttl in zip(ax.ravel(), img, ("nuclear", "membrane")):
     a.imshow(im)
     a.set_title(f"{ttl.capitalize()} channel")
 ```
@@ -581,6 +581,7 @@ img.shape
 # Therefore...
 desired_shape = 600
 pad_size = (desired_shape - img.shape[1]) // 2
+pad_size
 ```
 
 ```{code-cell} ipython3
@@ -594,7 +595,7 @@ slideshow:
   slide_type: subslide
 ---
 fig, ax = plt.subplots(1, 2, figsize=(16, 6))
-for a, im, tt in zip(ax.ravel(), img, ("nuclear", "membrane")):
+for a, im, tt in zip(ax.ravel(), img_padded, ("nuclear", "membrane")):
     a.imshow(im)
     a.set_title(f"{ttl.capitalize()} channel")
 ```
@@ -634,8 +635,6 @@ What if instead we created a *mapping* of tiles to their original slices.
 
 - Use the same mapping to "untile" the output image
 
-+++ {"slideshow": {"slide_type": "subslide"}}
-
 ```{code-cell} ipython3
 step = 100
 
@@ -653,14 +652,16 @@ tiles.keys()
 
 ```{code-cell} ipython3
 plt.figure();
-plt.imshow(tiles[((0, 100), (0, 100))][0, ...])
+plt.imshow(tiles[((300, 400), (300, 400))][0, ...])
 ```
 
-+++ {"slideshow": {"slide_type": "slide"}}
+```{code-cell} ipython3
+---
+slideshow:
+  slide_type: slide
+---
+# Now, the batch loop would look something like:
 
-Now, the batch loop would look something like:
-
-```python
 # Pick whatever we want, though the below assumes that the total number of
 # tiles is divisble by batch size (easy to generalize)
 batch_size = 4
