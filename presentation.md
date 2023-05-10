@@ -624,7 +624,81 @@ From here:
   memory as the input image.
   * Can become an issue for larger images, especially if they're multiplexed etc.
 
-Instead, let's 
++++ {"slideshow": {"slide_type": "fragment"}}
+
+What if instead we created a *mapping* of tiles to their original slices.
+
++++ {"slideshow": {"slide_type": "fragment"}}
+
+- Reduces the pre-model memory footprint by factor of 2
+
+- Use the same mapping to "untile" the output image
+
++++ {"slideshow": {"slide_type": "subslide"}}
+
+```{code-cell} ipython3
+step = 100
+
+tiles = {}
+for xstart in np.arange(img_padded.shape[1], step=100):
+    for ystart in np.arange(img_padded.shape[2], step=100):
+        xbounds, ybounds = (xstart, xstart + step), (ystart, ystart + step)
+        xslice, yslice = slice(*xbounds), slice(*ybounds)
+        tiles[(xbounds, ybounds)] = img_padded[:, xslice, yslice]
+```
+
+```{code-cell} ipython3
+tiles.keys()
+```
+
+```{code-cell} ipython3
+plt.figure();
+plt.imshow(tiles[((0, 100), (0, 100))][0, ...])
+```
+
++++ {"slideshow": {"slide_type": "slide"}}
+
+Now, the batch loop would look something like:
+
+```python
+# Pick whatever we want, though the below assumes that the total number of
+# tiles is divisble by batch size (easy to generalize)
+batch_size = 4
+
+# Let's assume the model takes in 2-channel images, and spits out single-channel
+# predictions.
+model_output = np.zeros(img_padded.shape[1:])
+
+# The total CPU memory allocation is now: img_padded.nbytes + batch.nbytes +
+# model_output.nbytes
+batch = np.zeros((batch_size, tile_size, tile_size, 2))  # Simple example: square images
+bounds = list(range(batch_size))  # For holding tile indices over batching
+for idx, ((xb, yb), tile) in enumerate(tiles.items()):
+    batch[idx % batch_size] = tile.transpose((1, 2, 0))
+    bounds[idx % batch_size] = (slice(*xb), slice(*yb))
+    # Send batch to model for prediction, and map results back to the
+    # pre-allocated output image
+    if (idx + 1) % batch_size == 0:
+        # World's worst deep learning model: sum the channels
+        # Just transforming data to the appropriate shape for illustration purposes
+        output = batch.sum(axis=-1)
+        # Map prediction to output image
+        for loc, prediction in zip(bounds, output):
+            model_output[loc] = prediction
+```
+
++++ {"slideshow": {"slide_type": "subslide"}}
+
+Our "model" simply combined the channels - let's see how it did:
+
+```{code-cell} ipython3
+plt.figure()
+plt.imshow(model_output)
+```
+
+```{code-cell} ipython3
+np.array_equal(model_output, img_padded.sum(axis=0))
+```
 
 TODO: organize below
 
