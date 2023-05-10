@@ -499,6 +499,47 @@ data_out = np.ascontiguousarray(data_out)  # i.e. no transpose was necessary
 %timeit -n1 -r1 np.save("/tmp/cxyb.npz", data_out)
 ```
 
++++ {"slideshow": {"slide_type": "slide"}}
+
+# Basic Indexing
+
+- [Basic indexing][basic-idx] occurs whenever the indices are limited to scalars and slices
+
+- Basic indexing always returns *views*, i.e. no data copying
+  * As mentioned, saves memory
+  * Modifications to either array affect the other, since they point to the
+    same memory
+
+[basic-idx]: https://numpy.org/doc/stable/user/basics.indexing.html#basic-indexing
+
+```{code-cell}
+---
+slideshow:
+  slide_type: subslide
+---
+a = np.arange(12, dtype=int).reshape(2, 2, 3)
+a
+```
+
+```{code-cell}
+b = a.reshape(-1)  # Equivalent to ravel()
+```
+
+```{code-cell}
+b[3:9] = 100
+a
+```
+
+```{code-cell}
+a[-1] = 1000
+b
+```
+
++++ {"slideshow": {"slide_type": "slide"}}
+
+## Example: Tiling
+
+
 TODO: organize below
 
 +++ {"slideshow": {"slide_type": "slide"}}
