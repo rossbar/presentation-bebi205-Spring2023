@@ -488,8 +488,15 @@ data_out.shape
 ```
 
 ```{code-cell} ipython3
-# Beware: ascontiguousarray copies the data!
+# Beware: ascontiguousarray copies the data! Still faster even with the copy
 %timeit -n1 -r1 np.save("/tmp/cxyb.npz", np.ascontiguousarray(data_out))
+```
+
+```{code-cell} ipython3
+# Even better - if you can engineer your pipeline to load memory from
+# disk in the order you want
+data_out = np.ascontiguousarray(data_out)  # i.e. no transpose was necessary
+%timeit -n1 -r1 np.save("/tmp/cxyb.npz", data_out)
 ```
 
 TODO: organize below
