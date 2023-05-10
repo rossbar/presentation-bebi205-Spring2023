@@ -539,6 +539,92 @@ b
 
 ## Example: Tiling
 
+```{code-cell} ipython3
+import tifffile as tff
+# Image from deepcell intro
+img = tff.imread("data/example_input_combined.tif")
+img.shape
+```
+
+```{code-cell}
+fig, ax = plt.subplots(1, 2, figsize=(16, 6))
+for a, im, tt in zip(ax.ravel(), img, ("nuclear", "membrane")):
+    a.imshow(im)
+    a.set_title(f"{ttl.capitalize()} channel")
+```
+
++++ {"slideshow": {"slide_type": "slide"}}
+
+For the sake of argument, let's say the input layer requires images of shape
+100x100 pixels.
+
+A common pattern:
+ - Pad the input image so that the tile size partitions the space evenly
+ - Allocate an output array with shape `(num_tiles, w, h, num_channels)`
+ - Populate this array, keeping a separate mapping of tile -> coordinates in
+   the original image
+
++++ {"slideshow": {"slide_type": "fragment"}}
+
+Something like:
+
+```{code-cell} ipython3
+---
+slideshow:
+  slide_type: subslide
+---
+tile_size = 100  # in both w & h dimensions
+img.shape
+```
+
+```{code-cell} ipython3
+# Therefore...
+desired_shape = 600
+pad_size = (desired_shape - img.shape[1]) // 2
+```
+
+```{code-cell} ipython3
+img_padded = np.pad(img, ((0, 0), (pad_size,)*2, (pad_size,)*2))
+img_padded.shape
+```
+
+```{code-cell} ipython3
+---
+slideshow:
+  slide_type: subslide
+---
+fig, ax = plt.subplots(1, 2, figsize=(16, 6))
+for a, im, tt in zip(ax.ravel(), img, ("nuclear", "membrane")):
+    a.imshow(im)
+    a.set_title(f"{ttl.capitalize()} channel")
+```
+
+```{code-cell} ipython3
+model_input = np.zeros(
+    ((img_padded.shape[1] // tile_size)**2, tile_size, tile_size, 2),
+    dtype=img_padded.dtype,
+)
+model_input.shape
+```
+
+From here:
+
+```python
+# for idx, tile in enumerate(image):
+#     model_input[i] = tile
+# batch_size = blah
+# for i in range(0, model_input.shape[0], batch_size):
+#     batch_out = model.predict(model_input[i:i+batch_size, ...]
+# etc.
+```
+
++++ {"slideshow": {"slide_type": "subslide"}}
+
+- One drawback: pre-allocating `model_input` means you need 2x the amount of
+  memory as the input image.
+  * Can become an issue for larger images, especially if they're multiplexed etc.
+
+Instead, let's 
 
 TODO: organize below
 
