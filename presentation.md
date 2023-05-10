@@ -636,9 +636,62 @@ Cost of construction:
 
 [fluent-python]: https://www.oreilly.com/library/view/fluent-python-2nd/9781492056348/
 
-% Strided memory model
-% - The double-edged sword (e.g. transpose batch/channel)
-% - Tiling
++++ {"slideshow": {"slide_type": "subslide"}}
+
+# Takeaways
+
+- Developing a stronger understanding of the underlying memory model of any
+  data structure is important!
+  * Especially as data scales up!
+
+- Often a fundamental tradeoff between computation time and memory requirements
+  * Which end up being bottlenecks ends up being problem/data scale dependent
+
++++ {"slideshow": {"slide_type": "fragment"}}
+
+> The real proglem is that programmers have spent far too much time worrying
+> about efficiency in the wrong places and at the wrong times;
+> **premature optimization is the root of all evil (or at least most of it) in programming**
+> - Donald Knuth, The Art of Computer Programming
+
++++ {"slideshow": {"slide_type": "fragment"}}
+
+- Avoid *paralysis by analysis*
+  * Solve problems with performance as they arise, rather than over-engineering
+    for things you *expect might* become problems.
+
++++ {"slideshow": {"slide_type": "fragment"}}
+
+- Relevant [xkcd](https://xkcd.com/1205/)
+
++++ {"slideshow": {"slide_type": "subslide"}}
+
+- In my experience, focusing on clear expression of ideas in code is far more
+  beneficial than worrying about optimal/performant solutions.
+
+- Collaboration is the fastest way to improve as a programmer
+  * Don't be afraid of sharing your code because it's "bad"!
+
++++ {"slideshow": {"slide_type": "fragment"}}
+
+> The best way to get the right answer is to put the wrong answer on the
+> internet
+> - Anonymous
+
++++ {"slideshow": {"slide_type": "fragment"}}
+
+- But... there are a lot of jerks out there: find people that you like
+  working with (and try not to be one of the jerks!)
+
++++ {"slideshow": {"slide_type": "slide"}}
+
+Interested in open source? Scientific software? Python? Any/all of the above?
+
+<center>
+Let's chat! 
+
+rossbar@caltech.edu
+</center>
 
 % XArray example: CODEX data
 
