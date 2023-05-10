@@ -265,6 +265,7 @@ The strided indexing scheme allows us to interpret the memory block as a
 
 ```{code-cell} ipython3
 a = np.array([[0, 6, 1], [3, 4, 2]], dtype=np.uint8)
+a
 ```
 
 The `.data` attribute points to the underlying data buffer in memory:
@@ -288,7 +289,7 @@ a[idx]
 Mapping back to the 1D data buffer:
 
 ```{code-cell} ipython3
-a.strides
+a.strides  # note: strides are in *bytes*
 ```
 
 ```{code-cell} ipython3
@@ -334,33 +335,33 @@ Let's say we want to represent the following 2D array:
  [7, 8, 9]]
 ```
 
-```{code-cell}
+```{code-cell} ipython3
 ---
 slideshow:
   slide_type: subslide
 ---
-x = np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9], dtype=np.uint8, order="C")
+x = np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]], dtype=np.uint8, order="C")
 x
 ```
 
-```{code-cell}
+```{code-cell} ipython3
 x.strides  # Last index "varies the fastest" (smallest stride)
 ```
 
-```{code-cell}
+```{code-cell} ipython3
 x.tobytes("A")  # order="A" preserves the ordering of the underlying memory buffer
 ```
 
-```{code-cell}
+```{code-cell} ipython3
 y = np.array(x, order="F")  # Same data stored in a different order
 y
 ```
 
-```{code-cell}
+```{code-cell} ipython3
 y.strides  # First index "varies the fastest" (smallest stride)
 ```
 
-```{code-cell}
+```{code-cell} ipython3
 y.tobytes("A")
 ```
 
@@ -368,7 +369,7 @@ y.tobytes("A")
 
 ## Question: Is it possible to have memory layouts that are neither F nor C contiguous?
 
-```{code-cell}
+```{code-cell} ipython3
 # What do you think?
 ```
 
@@ -376,7 +377,7 @@ y.tobytes("A")
 
 ## Another Question: Is it possible to have non-contiguous memory in 2D?
 
-```{code-cell}
+```{code-cell} ipython3
 # You tell me!
 a = np.arange(12).reshape(3, 4)
 a
@@ -390,16 +391,18 @@ Understanding the strided memory model can help you determine if/when numpy
 will copy data.
  - NumPy generally tries not to copy data (see e.g. `reshape()`, `ravel()`), but
    sometimes there is no way to represent the output array with a given shape
-   with only strides + offsets
+   with only strides + data offset
 
-```{code-cell}
+```{code-cell} ipython3
 b = a[1:].ravel()  # Returns a view
-b.base
+print(b.flags)
+b
 ```
 
-```{code-cell}
+```{code-cell} ipython3
 c = a[:2, 1:3].ravel()  # Copies: no way to represent the raveled data with stride only
-c.base
+print(c.flags)
+c
 ```
 
 +++ {"slideshow": {"slide_type": "slide"}}
@@ -410,7 +413,8 @@ c.base
   (and in some cases adjusting the `data` pointer)
 
 - The same memory block can be viewed in different ways *without copying the data*
-  * e.g. reshaping, slicing, transposing
+  * e.g. reshaping, transposing
+  * Also **basic indexing**, i.e. multi-dimensional slicing, which never copies data
 
 - Can have "virtual" dimensions by using strides of 0 -> **array broadcasting**
   * Again, can help avoid copying data/allocating temporary arrays
@@ -458,6 +462,35 @@ np.array_equal(a, b)
 [Check out the scipy lecture notes!][sli-cpu-cache]
 
 [sli-cpu-cache]: https://scipy-lectures.org/advanced/advanced_numpy/#cpu-cache-effects
+
++++ {"slideshow": {"slide_type": "subslide"}}
+
+## (Slightly) less contrived example
+
+The dreaded batch/channel swap!
+
+```{code-cell} ipython3
+rng = np.random.default_rng(0xdeadc0de)
+data_in = rng.random((1, 1024, 1024, 40))
+data_in.nbytes / 1e6
+```
+
+```{code-cell} ipython3
+# Some pre-processing prior to submitting to the model (thresholding, normalization, etc)
+# ...
+# Final step: swap batch and channel dims
+data_out = np.transpose(data_in, (3, 1, 2, 0))
+data_out.shape
+```
+
+```{code-cell} ipython3
+%timeit -n1 -r1 np.save("/tmp/cxyb.npz", data_out)
+```
+
+```{code-cell} ipython3
+# Beware: ascontiguousarray copies the data!
+%timeit -n1 -r1 np.save("/tmp/cxyb.npz", np.ascontiguousarray(data_out))
+```
 
 TODO: organize below
 
