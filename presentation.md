@@ -512,7 +512,9 @@ The dreaded batch/channel swap!
 
 ```{code-cell} ipython3
 rng = np.random.default_rng(0xdeadc0de)
-data_in = rng.random((1, 1024, 1024, 40))
+# Simulate loading a stack of single-channel images from disk in channel order
+# e.g. data_in = np.array([tff.imread(f"{ch}.tif") for ch in os.listdir(...)])
+data_in = rng.random((40, 1024, 1024))
 data_in.nbytes / 1e6
 ```
 
@@ -520,6 +522,7 @@ data_in.nbytes / 1e6
 # Some pre-processing prior to submitting to the model (thresholding, normalization, etc)
 # ...
 # Final step: swap batch and channel dims
+data_in = data_in[..., np.newaxis]  # Add a batch dimension
 data_out = np.transpose(data_in, (3, 1, 2, 0))
 data_out.shape
 ```
@@ -534,6 +537,10 @@ data_out.shape
 ```
 
 ```{code-cell} ipython3
+---
+slideshow:
+  slide_type: subslide
+---
 # Even better - if you can engineer your pipeline to load memory from
 # disk in the order you want
 data_out = np.ascontiguousarray(data_out)  # i.e. no transpose was necessary
@@ -969,13 +976,13 @@ For more on fractal geometry and iterative analysis, check out:
 
 - e.g. an upper triangular array
 
-```{code-cell}
+```{code-cell} ipython3
 a = np.arange(16).reshape(4, 4)
 tril_idx = np.tril_indices(a.size)
 tril_idx  # 2 arrays of same length with x and y coords, respectively
 ```
 
-```{code-cell}
+```{code-cell} ipython3
 ---
 slideshow:
   slide_type: subslide
@@ -990,17 +997,17 @@ a
 
 For example, generating a binary occupancy mask from a collection of 3D points:
 
-```{code-cell}
+```{code-cell} ipython3
 !head data/neuron_trace.csv
 ```
 
-```{code-cell}
+```{code-cell} ipython3
 xyz = np.loadtxt(
     "data/neuron_trace.csv", usecols=(2, 3, 4), unpack=False
 )
 ```
 
-```{code-cell}
+```{code-cell} ipython3
 ---
 slideshow:
   slide_type: subslide
@@ -1014,11 +1021,11 @@ ax.scatter3D(*xyz.T)
 
 Generating an occupancy mask with advanced indexing:
 
-```{code-cell}
+```{code-cell} ipython3
 occ_mask = np.zeros((2048, 2048, 127), dtype=bool)
 ```
 
-```{code-cell}
+```{code-cell} ipython3
 # Naive conversion of point locations to coordinate grid by casting to int
 idx = xyz.astype(np.intp)
 x, y, z = idx.T  # Unpack
@@ -1068,7 +1075,7 @@ and other common issues.
 This latter point can cause real headaches, especially in the context of
 reduction operations:
 
-```{code-cell}
+```{code-cell} ipython3
 m = np.matrix(np.eye(6))
 m.sum(axis=1)  # !
 ```
