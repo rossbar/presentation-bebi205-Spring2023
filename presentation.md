@@ -714,8 +714,6 @@ What about padding though, there's something unsatisfying about that...
 
 - For one thing, our data efficiency is not very good:
 
-+++ {"slideshow": {"slide_type": "fragment"}}
-
 ```{code-cell} ipython3
 img.nbytes / img_padded.nbytes
 ```
@@ -840,8 +838,6 @@ for _ in range(10):
     z = z ** 2 - 1
 ```
 
-+++ {"slideshow": {"slide_type": "subslide"}}
-
 ```{code-cell} ipython3
 plt.figure()
 plt.imshow(div_step, extent=[-2, 2, -2, 2])
@@ -851,6 +847,31 @@ Cool.
 
 Can we improve this?
 
++++ {"slideshow": {"slide_type": "fragment"}}
+
+We only need to compute the subsequent iterations for values that have note
+yet diverged!
+
+
+```{code-cell} ipython3
+z = x + x[:, np.newaxis]*1j
+div_step = np.zeros(z.shape, dtype=np.uint8)
+
+# f(z) = z**2 - 1
+for _ in range(10):
+    conv_mask = np.abs(z) < 2.0
+    div_step[conv_mask] += 1  # Increment counter at values below the divergence thresh
+    z[conv_mask] = z[conv_mask] ** 2 - 1
+```
+
++++ {"slideshow": {"slide_type": "fragment"}}
+
+- Improved performance
+
+- Get rid of invalid value warnings
+
+
++++ {"slideshow": {"slide_type": "slide"}}
 
 TODO: organize below
 
