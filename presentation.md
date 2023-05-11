@@ -826,7 +826,7 @@ Use Boolean masking to limit the computation to the relevant subset of data
 
 ```{code-cell} ipython3
 # Complex plane spanning [-2, 2], [-2i, 2i]
-x = np.linspace(-2, 2, 400)
+x = np.linspace(-2, 2, 2000)
 z = x + x[:, np.newaxis]*1j
 
 # Keep track of when values in the plane diverge under iterative function application
@@ -870,8 +870,71 @@ for _ in range(10):
 
 - Get rid of invalid value warnings
 
++++ {"slideshow": {"slide_type": "fragment"}}
+
+For more on Julia sets, check out:
+ - [The matplotlib gallery][mpl-mandelbrot]
+ - [NumPy Tutorials][npt-mandelbrot]
+
+[mpl-mandelbrot]: https://matplotlib.org/stable/gallery/showcase/mandelbrot.html
+[npt-mandelbrot]: https://numpy.org/numpy-tutorials/content/tutorial-plotting-fractals.html
 
 +++ {"slideshow": {"slide_type": "slide"}}
+
+## Advanced Indexing: Arrays of indices
+
+- Useful for assigning to/extracting from arrays by coordinate location
+
+- e.g. an upper triangular array
+
+```{code-cell}
+a = np.arange(16).reshape(4, 4)
+tril_idx = np.tril_indicies(a.size)
+tril_idx  # 2 arrays of same length with x and y coords, respectively
+```
+
+```{code-cell}
+a[tril_idx] = 0
+a
+```
+
++++ {"slideshow": {"slide_type": "slide"}}
+
+### Mapping points to coordinates
+
+For example, generating a binary occupancy mask from a collection of 3D points:
+
+```{code-cell}
+!head data/neuron_trace.csv
+```
+
+```{code-cell}
+xyz = np.loadtxt(
+    "data/neuron_trace.csv", usecols=(2, 3, 4), unpack=False
+)
+```
+
+```{code-cell}
+fig = plt.figure()
+ax = fig.add_subplot(111, projection="3d")
+ax.scatter3D(*xyz.T)
+```
+
++++ {"slideshow": {"slide_type": "slide"}}
+
+Generating an occupancy mask with advanced indexing:
+
+```{code-cell}
+occ_mask = np.zeros((2048, 2048, 127), dtype=bool)
+```
+
+```{code-cell}
+# Naive conversion of point locations to coordinate grid by casting to int
+idx = xyz.astype(np.intp)
+x, y, z = idx.T  # Unpack
+occ_mask[x, y, z] = True
+occ_mask.sum()
+```
 
 TODO: organize below
 
@@ -1029,7 +1092,6 @@ rossbar@caltech.edu
 % XArray example: CODEX data
 
 % Advanced indexing
-% Boolean masks!
 % Also indices: 2 examples, point-wise data to grid (neuron example)
 
 % Do's and dont's
