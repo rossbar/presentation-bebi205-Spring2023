@@ -588,7 +588,7 @@ img.shape
 ```
 
 ```{code-cell} ipython3
-fig, ax = plt.subplots(1, 2, figsize=(8, 6))
+fig, ax = plt.subplots(1, 2, figsize=(10, 4))
 for a, im, ttl in zip(ax.ravel(), img, ("nuclear", "membrane")):
     a.imshow(im)
     a.set_title(f"{ttl.capitalize()} channel")
@@ -598,6 +598,8 @@ for a, im, ttl in zip(ax.ravel(), img, ("nuclear", "membrane")):
 
 For the sake of argument, let's say the input layer requires images of shape
 100x100 pixels.
+
++++ {"slideshow": {"slide_type": "fragment"}}
 
 A common pattern:
  - Pad the input image so that the tile size partitions the space evenly
@@ -635,7 +637,7 @@ img_padded.shape
 slideshow:
   slide_type: subslide
 ---
-fig, ax = plt.subplots(1, 2, figsize=(16, 6))
+fig, ax = plt.subplots(1, 2, figsize=(10, 4))
 for a, im, tt in zip(ax.ravel(), img_padded, ("nuclear", "membrane")):
     a.imshow(im)
     a.set_title(f"{ttl.capitalize()} channel")
@@ -648,6 +650,8 @@ model_input = np.zeros(
 )
 model_input.shape
 ```
+
++++ {"slideshow": {"slide_type": "subslide"}}
 
 From here:
 
@@ -677,11 +681,15 @@ What if instead we created a *mapping* of tiles to their original slices.
 - Use the same mapping to "untile" the output image
 
 ```{code-cell} ipython3
+---
+slideshow:
+  slide_type: subslide
+---
 step = 100
 
 tiles = {}
-for xstart in np.arange(img_padded.shape[1], step=100):
-    for ystart in np.arange(img_padded.shape[2], step=100):
+for xstart in np.arange(img_padded.shape[1], step=step):
+    for ystart in np.arange(img_padded.shape[2], step=step):
         xbounds, ybounds = (xstart, xstart + step), (ystart, ystart + step)
         xslice, yslice = slice(*xbounds), slice(*ybounds)
         tiles[(xbounds, ybounds)] = img_padded[:, xslice, yslice]
@@ -692,17 +700,19 @@ tiles.keys()
 ```
 
 ```{code-cell} ipython3
+---
+slideshow:
+  slide_type: subslide
+---
 plt.figure();
 plt.imshow(tiles[((300, 400), (300, 400))][0, ...])
 ```
 
-```{code-cell} ipython3
----
-slideshow:
-  slide_type: slide
----
-# Now, the batch loop would look something like:
++++ {"slideshow": {"slide_type": "slide"}}
 
+Now, the batch loop would look something like:
+
+```{code-cell} ipython3
 # Pick whatever we want, though the below assumes that the total number of
 # tiles is divisble by batch size (easy to generalize)
 batch_size = 4
@@ -734,12 +744,18 @@ for idx, ((xb, yb), tile) in enumerate(tiles.items()):
 Our "model" simply combined the channels - let's see how it did:
 
 ```{code-cell} ipython3
-plt.figure()
-plt.imshow(model_output)
+fig, ax = plt.subplots(1, 3, figsize=(10, 4))
+ax[0].imshow(img_padded[0, ...])
+ax[1].imshow(img_padded[1, ...])
+ax[2].imshow(model_output)
 ```
 
 ```{code-cell} ipython3
-np.array_equal(model_output, img_padded.sum(axis=0))
+---
+slideshow:
+  slide_type: subslide
+---
+np.allclose(model_output, img_padded.sum(axis=0))
 ```
 
 +++ {"slideshow": {"slide_type": "slide"}}
@@ -748,6 +764,8 @@ Seems... fine.
 
 Not the clearest code but also not an unreasonable refactor to reduce
 total memory footprint.
+
++++ {"slideshow": {"slide_type": "fragment"}}
 
 What about padding though, there's something unsatisfying about that...
 
@@ -806,21 +824,21 @@ tile_grid.shape
 How does it look? Let's compare the top row of tiles for the nuclear channel:
 
 ```{code-cell} ipython3
-plt.figure(figsize=(12, 3))
+plt.figure(figsize=(10, 2))
 plt.imshow(img[0, :100, :])
 ```
 
 ```{code-cell} ipython3
-fig, ax = plt.subplots(1, grid_size, figsize=(12, 3))
+fig, ax = plt.subplots(1, grid_size, figsize=(10, 2))
 vmax = img[0, :100].max()  # So that all tiles have the same color range
 
-for tile, a in zip(tile_grid[0, :, ...], ax.ravel()):
-    a.imshow(t, vmax=vmax)
+for tile, a in zip(tile_grid[0, 0, :, ...], ax.ravel()):
+    a.imshow(tile, vmax=vmax)
 ```
 
-+++ {"slideshow": {"slide_type": "fragment"}}
++++ {"slideshow": {"slide_type": "subslide"}}
 
-How could this be improved? How would you do it?
+Could this be improved? How would you do it?
 
 +++ {"slideshow": {"slide_type": "subslide"}}
 
@@ -830,13 +848,21 @@ A quirk:
 tile_grid[0, :, ...] /= vmax
 ```
 
++++ {"slideshow": {"slide_type": "fragment"}}
+
+### Why?
+
 ```{code-cell} ipython3
+---
+slideshow:
+  slide_type: fragment
+---
 tile_grid.flags
 ```
 
 +++ {"slideshow": {"slide_type": "slide"}}
 
-# Takeaways
+## Takeaways from tiling
 
 - Basic indexing can really help reduce the memory footprint of code.
 
@@ -853,7 +879,11 @@ tile_grid.flags
   * **Boolean indexing**: conditional selection of values
   * **Array indexing**: selecting values in an array by their coordinates
 
++++ {"slideshow": {"slide_type": "fragment"}}
+
 - Advanced indexing *always* creates copies
+
++++ {"slideshow": {"slide_type": "fragment"}}
 
 - The result of an advanced indexing operation is 1D
 
@@ -882,9 +912,15 @@ for _ in range(10):
 ```
 
 ```{code-cell} ipython3
+---
+slideshow:
+  slide_type: subslide
+---
 plt.figure()
 plt.imshow(div_step, extent=[-2, 2, -2, 2])
 ```
+
++++ {"slideshow": {"slide_type": "subslide"}}
 
 Cool.
 
@@ -895,8 +931,11 @@ Can we improve this?
 We only need to compute the subsequent iterations for values that have note
 yet diverged!
 
-
 ```{code-cell} ipython3
+---
+slideshow:
+  slide_type: subslide
+---
 z = x + x[:, np.newaxis]*1j
 div_step = np.zeros(z.shape, dtype=np.uint8)
 
@@ -915,7 +954,7 @@ for _ in range(10):
 
 +++ {"slideshow": {"slide_type": "fragment"}}
 
-For more on Julia sets, check out:
+For more on fractal geometry and iterative analysis, check out:
  - [The matplotlib gallery][mpl-mandelbrot]
  - [NumPy Tutorials][npt-mandelbrot]
 
@@ -932,11 +971,15 @@ For more on Julia sets, check out:
 
 ```{code-cell}
 a = np.arange(16).reshape(4, 4)
-tril_idx = np.tril_indicies(a.size)
+tril_idx = np.tril_indices(a.size)
 tril_idx  # 2 arrays of same length with x and y coords, respectively
 ```
 
 ```{code-cell}
+---
+slideshow:
+  slide_type: subslide
+---
 a[tril_idx] = 0
 a
 ```
@@ -958,6 +1001,10 @@ xyz = np.loadtxt(
 ```
 
 ```{code-cell}
+---
+slideshow:
+  slide_type: subslide
+---
 fig = plt.figure()
 ax = fig.add_subplot(111, projection="3d")
 ax.scatter3D(*xyz.T)
@@ -983,18 +1030,16 @@ occ_mask.sum()
 
 <!-- TODO Broadcasting: example from 2011 paper here -->
 
-TODO: organize below
-
 +++ {"slideshow": {"slide_type": "slide"}}
 
-# NumPy How-to's
+# Miscellania
 
 I've learned a lot from participating in the NumPy community (anyone would!)
 
 +++ {"slideshow": {"slide_type": "fragment"}}
 
-An unstructured collection of do-s, don't-s (guidelines of course, no rules!)
-and other common issues
+Here's an unstructured collection of do-s, don't-s (guidelines of course, no rules!)
+and other common issues.
 
 +++ {"slideshow": {"slide_type": "subslide"}}
 
@@ -1049,6 +1094,8 @@ m.sum(axis=0) + m.sum(axis=1)
 Largely because of `scipy.sparse`, which provides sparse data structures that
 unfortunately implement *matrix semantics* rather than *array semantics*.
 
++++ {"slideshow": {"slide_type": "fragment"}}
+
 A sparse *array* container is under active development!
 
 ```{code-cell} ipython3
@@ -1083,9 +1130,7 @@ a.sum(axis=0)
 
 # Finding the right tool for the job
 
-**Disclaimer:** This is just off the top of my head. This is not a comprehensive
-listing of tools I recommend over all others, but rather the first places I
-would (or in some cases do) look first when I encounter a certain type of problem/data.
++++ {"slideshow": {"slide_type": "fragment"}}
 
 - For tabular data, consider [`pandas`][pandas] (instead of structured dtypes)
 
@@ -1108,12 +1153,22 @@ would (or in some cases do) look first when I encounter a certain type of proble
 [pd-sparse]: https://sparse.pydata.org/en/stable/
 [cupy]: https://cupy.dev/
 
++++ {"slideshow": {"slide_type": "fragment"}}
+
+**Disclaimer:** This is just off the top of my head. This is not a comprehensive
+listing of tools I recommend over all others, but rather the first places I
+would (or in some cases do) look first when I encounter a certain type of problem/data.
+
 +++ {"slideshow": {"slide_type": "slide"}}
 
 # Don't forget about Python's data structures!
 
++++ {"slideshow": {"slide_type": "fragment"}}
+
 - A common pattern amongst users: NumPy is written in C, so it's faster across
   the board.
+
++++ {"slideshow": {"slide_type": "fragment"}}
 
 - Not so fast: choosing the right data structure is important!
 
@@ -1156,7 +1211,11 @@ How much did we improve?
 %timeit -n 1 -r 1 val in uniq_data
 ```
 
++++ {"slideshow": {"slide_type": "fragment"}}
+
 - Great! An optimized implementation, and still readable!
+
++++ {"slideshow": {"slide_type": "fragment"}}
 
 - But wait... IIRC from CS1, membership testing is `O(n)` for lists. Is there
   a better way?
@@ -1193,10 +1252,16 @@ Cost of construction:
 
 ## Takeaway
 
++++ {"slideshow": {"slide_type": "fragment"}}
+
 - Binary extensions do not always equal better performance.
+
++++ {"slideshow": {"slide_type": "fragment"}}
 
 - Python has many excellent built-in data structures. Learning to use them
   together with Scientific Python will improve your code.
+
++++ {"slideshow": {"slide_type": "fragment"}}
 
 - I strongly recommend [Fluent Python][fluent-python]
 
@@ -1204,16 +1269,18 @@ Cost of construction:
 
 +++ {"slideshow": {"slide_type": "subslide"}}
 
-# Takeaways
+# General Takeaways
 
 - Developing a stronger understanding of the underlying memory model of any
   data structure is important!
-  * Especially as data scales up!
+  * Especially as things scale!
+
++++ {"slideshow": {"slide_type": "fragment"}}
 
 - Often a fundamental tradeoff between computation time and memory requirements
   * Which end up being bottlenecks ends up being problem/data scale dependent
 
-+++ {"slideshow": {"slide_type": "fragment"}}
++++ {"slideshow": {"slide_type": "subslide"}}
 
 > The real problem is that programmers have spent far too much time worrying
 > about efficiency in the wrong places and at the wrong times;
@@ -1232,7 +1299,7 @@ Cost of construction:
   * Solve problems with performance as they arise, rather than over-engineering
     for things you *expect might* become problems.
 
-+++ {"slideshow": {"slide_type": "fragment"}}
++++ {"slideshow": {"slide_type": "subslide"}}
 
 - Relevant [xkcd](https://xkcd.com/1205/)
 
@@ -1240,6 +1307,9 @@ Cost of construction:
 
 - In my experience, focusing on clear expression of ideas in code is far more
   beneficial than worrying about optimal/performant solutions.
+  * Until you have a good idea what the bottlenecks are, at least.
+
++++ {"slideshow": {"slide_type": "fragment"}}
 
 - Collaboration is the fastest way to improve as a programmer
   * Don't be afraid of sharing your code because it's "bad"!
