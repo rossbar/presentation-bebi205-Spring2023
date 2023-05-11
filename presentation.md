@@ -1003,7 +1003,7 @@ For example, generating a binary occupancy mask from a collection of 3D points:
 
 ```{code-cell} ipython3
 xyz = np.loadtxt(
-    "data/neuron_trace.csv", usecols=(2, 3, 4), unpack=False
+    "data/neuron_trace.csv", comments="#", usecols=(2, 3, 4), unpack=False
 )
 ```
 
@@ -1014,7 +1014,7 @@ slideshow:
 ---
 fig = plt.figure()
 ax = fig.add_subplot(111, projection="3d")
-ax.scatter3D(*xyz.T)
+ax.scatter3D(*xyz.T);
 ```
 
 +++ {"slideshow": {"slide_type": "slide"}}
