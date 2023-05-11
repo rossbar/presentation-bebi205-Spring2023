@@ -422,8 +422,11 @@ c
 +++ {"slideshow": {"slide_type": "fragment"}}
 
 For a more thorough treatment of the strided memory model, see:
- - [A Guide to NumPy][numpy-book], esp. Ch. 2.3
+ - [A Guide to NumPy (pdf)][numpy-book], esp. Ch. 2.3
  - [Advanced NumPy in the scipy-lecture-notes][sln]
+
+[numpy-book]: https://web.mit.edu/dvp/Public/numpybook.pdf
+[sln]: https://scipy-lectures.org/advanced/advanced_numpy/
 
 +++ {"slideshow": {"slide_type": "slide"}}
 
@@ -820,6 +823,8 @@ tile_grid.flags
 
 +++ {"slideshow": {"slide_type": "slide"}}
 
+<!-- TODO: Add label image remapping example -->
+
 ## Example: Julia sets
 
 Use Boolean masking to limit the computation to the relevant subset of data
@@ -936,6 +941,10 @@ occ_mask[x, y, z] = True
 occ_mask.sum()
 ```
 
++++ {"slideshow": {"slide_type": "slide"}}
+
+<!-- TODO Broadcasting: example from 2011 paper here -->
+
 TODO: organize below
 
 +++ {"slideshow": {"slide_type": "slide"}}
@@ -1045,7 +1054,7 @@ Cost of construction:
 
 +++ {"slideshow": {"slide_type": "fragment"}}
 
-> The real proglem is that programmers have spent far too much time worrying
+> The real problem is that programmers have spent far too much time worrying
 > about efficiency in the wrong places and at the wrong times;
 > **premature optimization is the root of all evil (or at least most of it) in programming**
 > - Donald Knuth, The Art of Computer Programming
