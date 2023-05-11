@@ -1,7 +1,12 @@
 numpy
+scipy
 matplotlib
 tifffile
 notebook<7  # RISE will likely break with release of nb v7
+# The following two pins are required to fix a bug in interactive plotting.
+# See https://github.com/jupyter/notebook/issues/6721#issuecomment-1445187389
+pyzmq<25
+jupyter_client<8
 jupytext
 rise
 sphinx
