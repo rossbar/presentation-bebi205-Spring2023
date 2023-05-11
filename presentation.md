@@ -701,6 +701,122 @@ plt.imshow(model_output)
 np.array_equal(model_output, img_padded.sum(axis=0))
 ```
 
++++ {"slideshow": {"slide_type": "slide"}}
+
+Seems... fine.
+
+Not the clearest code but also not an unreasonable refactor to reduce
+total memory footprint.
+
+What about padding though, there's something unsatisfying about that...
+
++++ {"slideshow": {"slide_type": "subslide"}}
+
+- For one thing, our data efficiency is not very good:
+
++++ {"slideshow": {"slide_type": "fragment"}}
+
+```{code-cell} ipython3
+img.nbytes / img_padded.nbytes
+```
+
++++ {"slideshow": {"slide_type": "fragment"}}
+
+- A decent chunk of the data we transfer over to the GPU(s) is just cruft from
+  zero-padding
+  * Even if the model is doing masked computation, still a waste of GPU memory
+
++++ {"slideshow": {"slide_type": "fragment"}}
+
+- What if instead of padding, we wanted to do overlapping tiles?
+
++++ {"slideshow": {"slide_type": "subslide"}}
+
+- This is mostly an excuse to show a little-known numpy feature that makes
+  extensive use of the strided memory model: `sliding_window_view`
+  * Who says location in the memory buffer has to have a *unique* multidimensional
+    index?!
+
+```{code-cell} ipython3
+img.shape  # A reminder...
+```
+
+```{code-cell} ipython3
+strided = np.lib.stride_tricks.sliding_window_view(
+    img, window_shape=(step, step), axis=(1, 2)
+)
+strided.shape
+```
+
++++ {"slideshow": {"slide_type": "subslide"}}
+
+We now have a `2 x (width - step) x (height - step)` array of `step x step` tiles!
+
+We could use this sliding window view to construct a 6x6 grid of tiles with
+basic indexing:
+
+```{code-cell} ipython3
+grid_size = 6  # From previous example
+grid_stride = int(np.ceil(strided.shape[1] / grid_size))
+tile_grid = strided[:, ::grid_stride, ::grid_stride, ...]
+tile_grid.shape
+```
+
++++ {"slideshow": {"slide_type": "subslide"}}
+
+How does it look? Let's compare the top row of tiles for the nuclear channel:
+
+```{code-cell} ipython3
+plt.figure(figsize=(12, 3))
+plt.imshow(img[0, :100, :])
+```
+
+```{code-cell} ipython3
+fig, ax = plt.subplots(1, grid_size, figsize=(12, 3))
+vmax = img[0, :100].max()  # So that all tiles have the same color range
+
+for tile, a in zip(tile_grid[0, :, ...], ax.ravel()):
+    a.imshow(t, vmax=vmax)
+```
+
++++ {"slideshow": {"slide_type": "fragment"}}
+
+How could this be improved? How would you do it?
+
++++ {"slideshow": {"slide_type": "subslide"}}
+
+A quirk:
+
+```{code-cell} ipython3
+tile_grid[0, :, ...] /= vmax
+```
+
+```{code-cell} ipython3
+tile_grid.flags
+```
+
++++ {"slideshow": {"slide_type": "slide"}}
+
+# Takeaways
+
+- Basic indexing can really help reduce the memory footprint of code.
+
+- May require re-thinking your analysis to take full advantage of memory views
+
++++ {"slideshow": {"slide_type": "slide"}}
+
+# Advanced indexing
+
+- [Advanced indexing][adv-idx] is triggered when the indexing object (i.e. the
+  thing inside the brackets) is a non-tuple sequence object.
+
+- Two primary use-cases:
+  * **Boolean indexing**
+
+[adv-idx]: https://numpy.org/doc/stable/user/basics.indexing.html#advanced-indexing
+
+
+
 TODO: organize below
 
 +++ {"slideshow": {"slide_type": "slide"}}
