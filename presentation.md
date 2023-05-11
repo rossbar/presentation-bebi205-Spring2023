@@ -886,6 +886,8 @@ tile_grid.flags
   * **Boolean indexing**: conditional selection of values
   * **Array indexing**: selecting values in an array by their coordinates
 
+[adv-idx]: https://numpy.org/doc/stable/user/basics.indexing.html#advanced-indexing
+
 +++ {"slideshow": {"slide_type": "fragment"}}
 
 - Advanced indexing *always* creates copies
@@ -893,8 +895,6 @@ tile_grid.flags
 +++ {"slideshow": {"slide_type": "fragment"}}
 
 - The result of an advanced indexing operation is 1D
-
-[adv-idx]: https://numpy.org/doc/stable/user/basics.indexing.html#advanced-indexing
 
 +++ {"slideshow": {"slide_type": "slide"}}
 
@@ -978,15 +978,11 @@ For more on fractal geometry and iterative analysis, check out:
 
 ```{code-cell} ipython3
 a = np.arange(16).reshape(4, 4)
-tril_idx = np.tril_indices(a.size)
+tril_idx = np.tril_indices(a.shape[0])
 tril_idx  # 2 arrays of same length with x and y coords, respectively
 ```
 
 ```{code-cell} ipython3
----
-slideshow:
-  slide_type: subslide
----
 a[tril_idx] = 0
 a
 ```
@@ -1032,8 +1028,6 @@ x, y, z = idx.T  # Unpack
 occ_mask[x, y, z] = True
 occ_mask.sum()
 ```
-
-+++ {"slideshow": {"slide_type": "slide"}}
 
 <!-- TODO Broadcasting: example from 2011 paper here -->
 
@@ -1152,7 +1146,7 @@ a.sum(axis=0)
 
 - For "ragged" arrays, consider a sparse format or [Awkward Array][awkward]
 
-- For general-purpose GPU programming, check out [`cupy`][cupy].
+- For high-level, general-purpose GPU programming check out [`cupy`][cupy].
 
 [pandas]: https://pandas.pydata.org/
 [awkward]: https://awkward-array.org/doc/main/index.html
@@ -1296,6 +1290,10 @@ Cost of construction:
 
 +++ {"slideshow": {"slide_type": "fragment"}}
 
+- Relevant [xkcd](https://xkcd.com/1205/)
+
++++ {"slideshow": {"slide_type": "subslide"}}
+
 - Avoid *paralysis by analysis*
   * The real power of Python is enabling analysts to explore, express, and
     communicate analyses. If you spend all your time worrying about whether
@@ -1304,11 +1302,7 @@ Cost of construction:
     "art" of scientific computing is knowing where they arise (or at least how
     to *investigate* how they arise), and how best to solve them.
   * Solve problems with performance as they arise, rather than over-engineering
-    for things you *expect might* become problems.
-
-+++ {"slideshow": {"slide_type": "subslide"}}
-
-- Relevant [xkcd](https://xkcd.com/1205/)
+    for things you expect *might become* problems.
 
 +++ {"slideshow": {"slide_type": "subslide"}}
 
