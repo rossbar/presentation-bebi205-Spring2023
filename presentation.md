@@ -949,6 +949,129 @@ TODO: organize below
 
 +++ {"slideshow": {"slide_type": "slide"}}
 
+# NumPy How-to's
+
+I've learned a lot from participating in the NumPy community (anyone would!)
+
++++ {"slideshow": {"slide_type": "fragments"}}
+
+An unstructured collection of do-s, don't-s (guidelines of course, no rules!)
+and other common issues
+
++++ {"slideshow": {"slide_type": "subslide"}}
+
+# Don't use `MaskedArray`
+
+- Boolean masks often get re-used, modified... might it make sense to tie them
+  to the underlying data?
+
+- NumPy provides a subclass of ndarray to do so: `np.ma.MaskedArray`
+  * Stores data + mask in the same structure
+
+- Why not to use it?
+  * From experience, there are many little incosistencies in how MaskedArray
+    objects are treated within numpy.
+
++++ {"slideshow": {"slide_type": "subslide"}}
+
+# Don't use `np.matrix`
+
+- `matrix` is another subclass of `ndarray` that has different semantics, most
+  notably:
+  - The `*` operater is treated as matrix multiplication, not element-wise
+    multiplication
+  - `matrix` objects are always two-dimensional
+
+This latter point can cause real headaches, especially in the context of
+reduction operations:
+
+```{code-cell}
+m = np.matrix(np.eye(6))
+m.sum(axis=1)  # !
+```
+
++++ {"slideshow": {"slide_type": "subslide"}}
+
+Subtle differences and chance for silently incorrect results due to e.g. broadcasting
+
+```{code-cell} ipython3
+a = rng.random(size=(3, 3))
+a.sum(axis=0) + a.sum(axis=1)
+```
+
+```{code-cell} ipython3
+m = np.matrix(a)
+m.sum(axis=0) + m.sum(axis=1)
+```
+
++++ {"slideshow": {"slide_type": "subslide"}}
+
+## Why is `matrix` still around?
+
+Largely because of `scipy.sparse`, which provides sparse data structures that
+unfortunately implement *matrix semantics* rather than *array semantics*.
+
+A sparse *array* container is under active development!
+
+```{code-cell} ipython3
+import scipy as sp
+a = sp.sparse.csr_array([[0, 1, 2, 0], [4, 9, 0, 1], [0, 0, 0, 10]])
+a
+```
+
+```{code-cell} ipython3
+a.sum(axis=0)
+```
+
++++ {"slideshow": {"slide_type": "subslide"}}
+
+- Lot's of opportunity to contribute to sparse data formats for the ecosystem!
+
++++ {"slideshow": {"slide_type": "subslide"}}
+
+# Check out the "new" [numpy.random interface][np-random]
+
+- Available since version 1.17
+
+- Better computational performance and statistical properties
+  * No more global state
+  * [Similar (but not identical) interface][random-new-different]
+  * New features for parallel generation
+
+[np-random]: https://numpy.org/devdocs/reference/random/index.html
+[random-new-different]: https://numpy.org/devdocs/reference/random/new-or-different.html
+
++++ {"slideshow": {"slide_type": "slide"}}
+
+# Finding the right tool for the job
+
+**Disclaimer:** This is just off the top of my head. This is not a comprehensive
+listing of tools I recommend over all others, but rather the first places I
+would (or in some cases do) look first when I encounter a certain type of problem/data.
+
+- For tabular data, consider [`pandas`][pandas] (instead of structured dtypes)
+
+- To expand the concept of labeled data to higher dimensions, check out
+  [`xarray`](https://docs.xarray.dev/en/stable/)
+
+- For out-of-memory data needs, consider tools that offer familiar interfaces to
+  disk-backed data, like [`tables (HDF5)`](https://www.pytables.org/) or
+  [`dask`](https://www.dask.org/)
+
+- For sparse data, consider [`scipy.sparse`][sp-sparse] or [pydata-sparse][pd-sparse]
+
+- For "ragged" arrays, consider a sparse format or [Awkward Array][awkward]
+
+- For general-purpose GPU programming, check out [`cupy`][cupy].
+
+[pandas]: https://pandas.pydata.org/
+[awkward]: https://awkward-array.org/doc/main/index.html
+[sp-sparse]: https://docs.scipy.org/doc/scipy/reference/sparse.html
+[pd-sparse]: https://sparse.pydata.org/en/stable/
+[cupy]: https://cupy.dev/
+
++++ {"slideshow": {"slide_type": "slide"}}
+
 # Don't forget about Python's data structures!
 
 - A common pattern amongst users: NumPy is written in C, so it's faster across
@@ -1062,6 +1185,12 @@ Cost of construction:
 +++ {"slideshow": {"slide_type": "fragment"}}
 
 - Avoid *paralysis by analysis*
+  * The real power of Python is enabling analysts to explore, express, and
+    communicate analyses. If you spend all your time worrying about whether
+    something is written "well", it defeats the purpose
+  * Problems/bottlenecks will naturally present themselves with scale. The
+    "art" of scientific computing is knowing where they arise (or at least how
+    to *investigate* how they arise), and how best to solve them.
   * Solve problems with performance as they arise, rather than over-engineering
     for things you *expect might* become problems.
 
@@ -1098,25 +1227,15 @@ Let's chat!
 rossbar@caltech.edu
 </center>
 
+<!--
 % XArray example: CODEX data
 
 % Advanced indexing
 % Also indices: 2 examples, point-wise data to grid (neuron example)
-
-% Do's and dont's
-% - no masked array
-% - no matrix
-% - no ragged arrays
-% - Most important: premature optimization is the root of all evil
-%   * The real power of Python is enabling analysts to explore, express, and
-%   * communicate analyses. If you spend all your time worrying about whether
-%   * something is written "well", it defeats the purpose
-%   * Problems/bottlenecks will naturally present themselves with scale. The
-%   * "art" of scientific computing is knowing where they arise (or at least how
-%   * to *investigate* how they arise), and how best to solve them.
 
 % Gotchas
 % - Relying on `base` as an indicator whether or not an array owns memory
 % - Floating point precision
 %   * e.g. `arange` with fp step
 % - Casting esp. int -> float
+-->
