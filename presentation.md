@@ -811,10 +811,45 @@ tile_grid.flags
   thing inside the brackets) is a non-tuple sequence object.
 
 - Two primary use-cases:
-  * **Boolean indexing**
+  * **Boolean indexing**: conditional selection of values
+  * **Array indexing**: selecting values in an array by their coordinates
+
+- Advanced indexing *always* creates copies
+
+- The result of an advanced indexing operation is 1D
 
 [adv-idx]: https://numpy.org/doc/stable/user/basics.indexing.html#advanced-indexing
 
++++ {"slideshow": {"slide_type": "slide"}}
+
+## Example: Julia sets
+
+Use Boolean masking to limit the computation to the relevant subset of data
+
+```{code-cell} ipython3
+# Complex plane spanning [-2, 2], [-2i, 2i]
+x = np.linspace(-2, 2, 400)
+z = x + x[:, np.newaxis]*1j
+
+# Keep track of when values in the plane diverge under iterative function application
+div_step = np.zeros(z.shape, dtype=np.uint8)
+
+# f(z) = z**2 - 1
+for _ in range(10):
+    div_step[np.abs(z) < 2.0] += 1  # Increment counter at values below the divergence thresh
+    z = z ** 2 - 1
+```
+
++++ {"slideshow": {"slide_type": "subslide"}}
+
+```{code-cell} ipython3
+plt.figure()
+plt.imshow(div_step, extent=[-2, 2, -2, 2])
+```
+
+Cool.
+
+Can we improve this?
 
 
 TODO: organize below
