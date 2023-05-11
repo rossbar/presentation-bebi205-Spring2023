@@ -196,12 +196,12 @@ ax.legend();
 
 ## Takeaways
 
-+++ {"slideshow": {"slide_type": "fragments"}}
++++ {"slideshow": {"slide_type": "fragment"}}
 
 - From this *very non-rigorous* analysis, it's not unreasonable to think that
   a greater fraction are driven by interests in data science/machine learning
 
-+++ {"slideshow": {"slide_type": "fragments"}}
++++ {"slideshow": {"slide_type": "fragment"}}
 
 - Perhaps greater fraction of new users interacting with NumPy **indirectly**;
   i.e. in the course of their research, rather than from a ground-up approach
@@ -211,6 +211,8 @@ ax.legend();
 
 No matter how you slice[^1] it, a thorough understanding of the n-dimensional
 array data structure is important!
+
++++ {"slideshow": {"slide_type": "fragment"}}
 
 [^1]: Pun absolutely intended
 
@@ -223,13 +225,19 @@ homogenously-typed data on CPUs.
 - Supports a wide range of operations for accessing/manipulating data with a
   concise and expressive syntax.
 
-+++ {"slideshow": {"slide_type": "fragments"}}
++++ {"slideshow": {"slide_type": "fragment"}}
 
 ## Key concepts
 
++++ {"slideshow": {"slide_type": "fragment"}}
+
 - The **strided memory model**
 
++++ {"slideshow": {"slide_type": "fragment"}}
+
 - The two flavors of **indexing**: basic & advanced
+
++++ {"slideshow": {"slide_type": "fragment"}}
 
 - **Vectorization** & **Broadcasting**
 
@@ -244,12 +252,18 @@ Image credit: Jarrod Millman et. al. - [Array programming with NumPy][numpy-pape
 
 # The strided memory model
 
++++ {"slideshow": {"slide_type": "fragment"}}
+
 - Data are stored linearly in computer memory
+
++++ {"slideshow": {"slide_type": "fragment"}}
 
 - NumPy arrays *describe* the data in memory allowing it to be interpreted
   a multi-dimensional array of elements.
   * Need to know how to interpret individual elements: `dtype`
   * Need to map from a multi-dimensional indexing scheme to memory block
+
++++ {"slideshow": {"slide_type": "fragment"}}
 
 - Turns out this requires only a few bits of information:
   * the number of dimensions and the size of each dimension, i.e. the array `shape`
@@ -287,6 +301,10 @@ a[idx]
 +++ {"slideshow": {"slide_type": "subslide"}}
 
 Mapping back to the 1D data buffer:
+
+```{code-cell} ipython3
+a
+```
 
 ```{code-cell} ipython3
 a.strides  # note: strides are in *bytes*
@@ -345,11 +363,11 @@ x
 ```
 
 ```{code-cell} ipython3
-x.strides  # Last index "varies the fastest" (smallest stride)
+x.tobytes("A")  # order="A" preserves the ordering of the underlying memory buffer
 ```
 
 ```{code-cell} ipython3
-x.tobytes("A")  # order="A" preserves the ordering of the underlying memory buffer
+x.strides  # Last index "varies the fastest" (smallest stride)
 ```
 
 ```{code-cell} ipython3
@@ -358,11 +376,11 @@ y
 ```
 
 ```{code-cell} ipython3
-y.strides  # First index "varies the fastest" (smallest stride)
+y.tobytes("A")
 ```
 
 ```{code-cell} ipython3
-y.tobytes("A")
+y.strides  # First index "varies the fastest" (smallest stride)
 ```
 
 +++ {"slideshow": {"slide_type": "slide"}}
@@ -409,12 +427,18 @@ c
 
 # The power of the strided memory model
 
++++ {"slideshow": {"slide_type": "fragment"}}
+
 - Can represent any regular multidimensional data with only `shape`, and `strides`
   (and in some cases adjusting the `data` pointer)
+
++++ {"slideshow": {"slide_type": "fragment"}}
 
 - The same memory block can be viewed in different ways *without copying the data*
   * e.g. reshaping, transposing
   * Also **basic indexing**, i.e. multi-dimensional slicing, which never copies data
+
++++ {"slideshow": {"slide_type": "fragment"}}
 
 - Can have "virtual" dimensions by using strides of 0 -> **array broadcasting**
   * Again, can help avoid copying data/allocating temporary arrays
@@ -447,20 +471,34 @@ b = np.ones((20000 * step,))[::step]
 ```
 
 ```{code-cell} ipython3
+---
+slideshow:
+  slide_type: fragment
+---
 np.array_equal(a, b)
 ```
 
 ```{code-cell} ipython3
+---
+slideshow:
+  slide_type: fragment
+---
 %timeit a.sum()
 ```
 
 ```{code-cell} ipython3
+---
+slideshow:
+  slide_type: fragment
+---
 %timeit b.sum()
 ```
 
 +++ {"slideshow": {"slide_type": "subslide"}}
 
 ## Why?
+
++++ {"slideshow": {"slide_type": "fragment"}}
 
 [Check out the scipy lecture notes!][sli-cpu-cache]
 
@@ -953,7 +991,7 @@ TODO: organize below
 
 I've learned a lot from participating in the NumPy community (anyone would!)
 
-+++ {"slideshow": {"slide_type": "fragments"}}
++++ {"slideshow": {"slide_type": "fragment"}}
 
 An unstructured collection of do-s, don't-s (guidelines of course, no rules!)
 and other common issues
