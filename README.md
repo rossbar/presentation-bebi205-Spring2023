@@ -36,3 +36,7 @@ RISE quick start:
   * Move one slide/fragment forward: `space`
   * Move one slide/fragment back: `shift+space`
 - Run executable cells just like a normal notebook: `shift+enter`
+
+[myst]: https://myst-nb.readthedocs.io/en/latest/authoring/text-notebooks.html
+[jupytext]: https://jupytext.readthedocs.io/en/latest/
+[rise]: https://rise.readthedocs.io/en/stable/
