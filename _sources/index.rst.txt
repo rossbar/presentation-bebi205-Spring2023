@@ -1,0 +1,8 @@
+BeBI 205 Guest Lecture: NumPy for Biological Image Analysis
+===========================================================
+
+.. toctree::
+   :maxdepth: 1
+   :hidden:
+
+   presentation

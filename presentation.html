@@ -1,0 +1,2240 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+    <title>NumPy for Biological Image Analysis &#8212; NumPy for Biological Imaging Analysis  documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=ac02cc09edc035673794" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=ac02cc09edc035673794" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=ac02cc09edc035673794" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=ac02cc09edc035673794" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=ac02cc09edc035673794" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=ac02cc09edc035673794" />
+  <script src="_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=ac02cc09edc035673794"></script>
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'presentation';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="BeBI 205 Guest Lecture: NumPy for Biological Image Analysis" href="index.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+  
+
+<a class="navbar-brand logo" href="index.html">
+  
+  
+  
+  
+  
+    <p class="title logo__title">NumPy for Biological Imaging Analysis  documentation</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="#">
+                        NumPy for Biological Image Analysis
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+        </div>
+      
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+    </div>
+  
+
+  
+    <label class="sidebar-toggle secondary-toggle" for="__secondary" tabindex="0">
+      <span class="fa-solid fa-outdent"></span>
+    </label>
+  
+</div>
+
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="#">
+                        NumPy for Biological Image Analysis
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script></div>
+        
+      </div>
+    
+  </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumb">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page">NumPy for...</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="o">%</span><span class="k">matplotlib</span> inline
+</pre></div>
+</div>
+</div>
+</div>
+<center>
+<section id="numpy-for-biological-image-analysis">
+<h1>NumPy for Biological Image Analysis<a class="headerlink" href="#numpy-for-biological-image-analysis" title="Permalink to this heading">#</a></h1>
+<section id="bebi-205-may-11th-2023">
+<h2>BeBi 205, May 11th 2023<a class="headerlink" href="#bebi-205-may-11th-2023" title="Permalink to this heading">#</a></h2>
+<section id="ross-barnowski-rossbar-on-github">
+<h3>Ross Barnowski, <a class="reference external" href="https://github.com/rossbar">&#64;rossbar</a> on GitHub<a class="headerlink" href="#ross-barnowski-rossbar-on-github" title="Permalink to this heading">#</a></h3>
+</center></section>
+</section>
+</section>
+<section id="why-numpy">
+<h1>Why NumPy?<a class="headerlink" href="#why-numpy" title="Permalink to this heading">#</a></h1>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">ndarray</span></code>: A generic, n-dimensional array data structure</p>
+<ul>
+<li><p>Fundamental data structure underlying the <em>Scientific Python Ecosystem</em></p></li>
+</ul>
+</li>
+</ul>
+<center>
+<section id="the-scientific-python-ecosystem">
+<h2>The Scientific Python Ecosystem<a class="headerlink" href="#the-scientific-python-ecosystem" title="Permalink to this heading">#</a></h2>
+<img src="images/scientific_python_ecosystem.png" alt="scientific_python_ecosystem" width=40%/>
+</center>
+<p>Image credit: Jarrod Millman et. al. - <a class="reference external" href="https://www.nature.com/articles/s41586-020-2649-2">Array programming with NumPy</a></p>
+</section>
+</section>
+<section id="a-bit-of-history">
+<h1>A Bit of History<a class="headerlink" href="#a-bit-of-history" title="Permalink to this heading">#</a></h1>
+<ul class="simple">
+<li><p><strong>Mid 90’s/Early 00’s</strong>: desire for high-performance numerical computation in
+Python culminates in the <code class="docutils literal notranslate"><span class="pre">Numeric</span></code> <a class="reference external" href="https://numpy.org/_downloads/768fa66c250a0335ad3a6a30fae48e34/numeric-manual.pdf">(pdf)</a> library.</p></li>
+</ul>
+<ul class="simple">
+<li><p>Early adopters included the <a class="reference external" href="http://www.stsci.edu/">Space Telescope Science Institute (STScI)</a>
+who adapted Numeric to better suit their needs: <code class="docutils literal notranslate"><span class="pre">NumArray</span></code>.</p></li>
+</ul>
+<ul class="simple">
+<li><p><strong>2005</strong> The best ideas from <code class="docutils literal notranslate"><span class="pre">Numeric</span></code> and <code class="docutils literal notranslate"><span class="pre">NumArray</span></code> were combined in the
+development of a new library: <code class="docutils literal notranslate"><span class="pre">NumPy</span></code></p>
+<ul>
+<li><p>Originally <code class="docutils literal notranslate"><span class="pre">scipy.core</span></code> rather than a standalone library.</p></li>
+<li><p>This work was largely done by <a class="reference external" href="https://github.com/teoliphant">Travis Oliphant</a>,
+then an assistant professor at BYU.</p></li>
+</ul>
+</li>
+</ul>
+<ul class="simple">
+<li><p><strong>2006</strong> NumPy v1.0 released in October</p></li>
+</ul>
+</section>
+<section id="changing-landscape">
+<h1>Changing Landscape<a class="headerlink" href="#changing-landscape" title="Permalink to this heading">#</a></h1>
+<ul class="simple">
+<li><p>In the early days, many new NumPy users were converts from languages like
+Matlab and IDL</p>
+<ul>
+<li><p>See e.g. the <a class="reference external" href="https://numpy.org/doc/stable/user/numpy-for-matlab-users.html">NumPy for Matlab users</a> article in the docs.</p></li>
+</ul>
+</li>
+</ul>
+<ul class="simple">
+<li><p><strong>Now</strong>: The scientific Python ecosystem (including libraries for data
+science and ML) is incredibly feature-rich and powerful, and is attracting
+many new users.</p>
+<ul>
+<li><p>Users interested in specific domains or applications (machine learning,
+image processing, geoscience, bioinformatics, etc.) end up interacting
+with NumPy indirectly.</p></li>
+</ul>
+</li>
+</ul>
+<section id="google-trends">
+<h2>Google Trends<a class="headerlink" href="#google-trends" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Data downloaded from google trends on 05-07-2023</span>
+<span class="c1"># Each term downloaded individually; time window = 09/01/2010 - 05/07-2023;</span>
+<span class="c1"># NOTE: Data from US only (Google trends default)</span>
+<span class="n">gt_data_path</span> <span class="o">=</span> <span class="n">Path</span><span class="o">.</span><span class="n">cwd</span><span class="p">()</span> <span class="o">/</span> <span class="s2">&quot;data/google_trends&quot;</span>
+<span class="nb">print</span><span class="p">([</span><span class="n">f</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">gt_data_path</span><span class="o">.</span><span class="n">iterdir</span><span class="p">()])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;machine_learning.csv&#39;, &#39;matlab.csv&#39;, &#39;numpy.csv&#39;, &#39;data_science.csv&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>head<span class="w"> </span>data/google_trends/data_science.csv
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Category: All categories
+
+Month,Data science: (United States)
+2010-09,1
+2010-10,1
+2010-11,1
+2010-12,1
+2011-01,1
+2011-02,1
+2011-03,1
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">timeseries_dtype</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dtype</span><span class="p">([(</span><span class="s1">&#39;date&#39;</span><span class="p">,</span> <span class="s1">&#39;datetime64[M]&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;relpop&#39;</span><span class="p">,</span> <span class="nb">float</span><span class="p">)])</span>
+
+<span class="n">parse_kwargs</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;skiprows&quot;</span> <span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+    <span class="s2">&quot;delimiter&quot;</span> <span class="p">:</span> <span class="s2">&quot;,&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;dtype&quot;</span> <span class="p">:</span> <span class="n">timeseries_dtype</span>
+<span class="p">}</span>
+
+<span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="n">ff</span><span class="o">.</span><span class="n">name</span><span class="p">[:</span><span class="o">-</span><span class="mi">4</span><span class="p">]</span> <span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="n">ff</span><span class="p">,</span> <span class="o">**</span><span class="n">parse_kwargs</span><span class="p">)</span> <span class="k">for</span> <span class="n">ff</span> <span class="ow">in</span> <span class="n">gt_data_path</span><span class="o">.</span><span class="n">iterdir</span><span class="p">()</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">vals</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">vals</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">],</span> <span class="n">vals</span><span class="p">[</span><span class="s1">&#39;relpop&#39;</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="n">name</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Google Trends (US): 2010 - Present&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Relative Popularity of Search Term [arb]&#39;</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">autofmt_xdate</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/caf272bc894f14d9f25c4be7eb8f12c4c94cbf80d63b73bf2276a6bb54c32ced.png" src="_images/caf272bc894f14d9f25c4be7eb8f12c4c94cbf80d63b73bf2276a6bb54c32ced.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">smooth</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">kernsize</span><span class="o">=</span><span class="mi">21</span><span class="p">):</span>
+    <span class="n">s_padded</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">((</span><span class="n">s</span><span class="p">[</span><span class="n">kernsize</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span><span class="mi">0</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">s</span><span class="p">,</span> <span class="n">s</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">:</span><span class="o">-</span><span class="n">kernsize</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]))</span>
+    <span class="n">kern</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">hamming</span><span class="p">(</span><span class="n">kernsize</span><span class="p">)</span>
+    <span class="n">res_padded</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">convolve</span><span class="p">(</span><span class="n">kern</span><span class="o">/</span><span class="n">kern</span><span class="o">.</span><span class="n">sum</span><span class="p">(),</span> <span class="n">s_padded</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;valid&#39;</span><span class="p">)</span>
+    <span class="c1"># De-pad and renormalize</span>
+    <span class="k">return</span> <span class="mi">100</span> <span class="o">*</span> <span class="n">res_padded</span><span class="p">[</span><span class="n">kernsize</span><span class="o">//</span><span class="mi">2</span><span class="p">:</span><span class="o">-</span><span class="n">kernsize</span><span class="o">//</span><span class="mi">2</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">/</span> <span class="n">res_padded</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">vals</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">vals</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">],</span> <span class="n">smooth</span><span class="p">(</span><span class="n">vals</span><span class="p">[</span><span class="s1">&#39;relpop&#39;</span><span class="p">]),</span> <span class="n">label</span><span class="o">=</span><span class="n">name</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Google Trends (US): 2010 - Present&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Relative Popularity of Search Term [arb]&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/d1d6d9c92e8a3f6c33826567897e29af574c55c30baffab75b7974b6e71e336c.png" src="_images/d1d6d9c92e8a3f6c33826567897e29af574c55c30baffab75b7974b6e71e336c.png" />
+</div>
+</div>
+</section>
+<section id="takeaways">
+<h2>Takeaways<a class="headerlink" href="#takeaways" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>From this <em>very non-rigorous</em> analysis, it’s not unreasonable to think that
+a greater fraction are driven by interests in data science/machine learning</p></li>
+</ul>
+<ul class="simple">
+<li><p>Perhaps greater fraction of new users interacting with NumPy <strong>indirectly</strong>;
+i.e. in the course of their research, rather than from a ground-up approach
+to numerical computing.</p></li>
+</ul>
+<p>No matter how you slice<a class="footnote-reference brackets" href="#id4" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a> it, a thorough understanding of the n-dimensional
+array data structure is important!</p>
+</section>
+</section>
+<section id="numpy-array-at-a-glance">
+<h1>NumPy Array at a glance<a class="headerlink" href="#numpy-array-at-a-glance" title="Permalink to this heading">#</a></h1>
+<p><code class="docutils literal notranslate"><span class="pre">ndarray</span></code>: a generic, n-dimensional array structure for in-memory,
+homogenously-typed data on CPUs.</p>
+<ul class="simple">
+<li><p>Supports a wide range of operations for accessing/manipulating data with a
+concise and expressive syntax.</p></li>
+</ul>
+<section id="key-concepts">
+<h2>Key concepts<a class="headerlink" href="#key-concepts" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>The <strong>strided memory model</strong></p></li>
+</ul>
+<ul class="simple">
+<li><p>The two flavors of <strong>indexing</strong>: basic &amp; advanced</p></li>
+</ul>
+<ul class="simple">
+<li><p><strong>Vectorization</strong> &amp; <strong>Broadcasting</strong></p></li>
+</ul>
+<center>
+<img src="images/numpy_features.png" alt="Summary of NumPy array functionality"/>
+</center>
+Image credit: Jarrod Millman et. al. - [Array programming with NumPy][numpy-paper]</section>
+</section>
+<section id="the-strided-memory-model">
+<h1>The strided memory model<a class="headerlink" href="#the-strided-memory-model" title="Permalink to this heading">#</a></h1>
+<ul class="simple">
+<li><p>Data are stored linearly in computer memory</p></li>
+</ul>
+<ul class="simple">
+<li><p>NumPy arrays <em>describe</em> the data in memory allowing it to be interpreted
+a multi-dimensional array of elements.</p>
+<ul>
+<li><p>Need to know how to interpret individual elements: <code class="docutils literal notranslate"><span class="pre">dtype</span></code></p></li>
+<li><p>Need to map from a multi-dimensional indexing scheme to memory block</p></li>
+</ul>
+</li>
+</ul>
+<ul class="simple">
+<li><p>Turns out this requires only a few bits of information:</p>
+<ul>
+<li><p>the number of dimensions and the size of each dimension, i.e. the array <code class="docutils literal notranslate"><span class="pre">shape</span></code></p></li>
+<li><p>the number of bytes one needs to “jump” to reach the next element in each
+dimension: <code class="docutils literal notranslate"><span class="pre">strides</span></code></p></li>
+</ul>
+</li>
+</ul>
+<section id="example">
+<h2>Example<a class="headerlink" href="#example" title="Permalink to this heading">#</a></h2>
+<p>The strided indexing scheme allows us to interpret the memory block as a
+2D array:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">]],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">)</span>
+<span class="n">a</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0, 6, 1],
+       [3, 4, 2]], dtype=uint8)
+</pre></div>
+</div>
+</div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">.data</span></code> attribute points to the underlying data buffer in memory:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="o">.</span><span class="n">data</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;memory at 0x7f4490dab030&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># NOTE: for illustrative purposes only, not recommended for user code</span>
+<span class="nb">bytes</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>b&#39;\x00\x06\x01\x03\x04\x02&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">idx</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">a</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2
+</pre></div>
+</div>
+</div>
+</div>
+<p>Mapping back to the 1D data buffer:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0, 6, 1],
+       [3, 4, 2]], dtype=uint8)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="o">.</span><span class="n">strides</span>  <span class="c1"># note: strides are in *bytes*</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(3, 1)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">idx_1d</span> <span class="o">=</span> <span class="n">a</span><span class="o">.</span><span class="n">strides</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">idx</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">a</span><span class="o">.</span><span class="n">strides</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">idx</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">idx_1d</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">bytes</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">data</span><span class="p">)[</span><span class="n">idx_1d</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2
+</pre></div>
+</div>
+</div>
+</div>
+<p>See also <a class="reference external" href="https://numpy.org/devdocs/reference/generated/numpy.ravel_multi_index.html"><code class="docutils literal notranslate"><span class="pre">np.ravel_multi_index</span></code></a></p>
+</section>
+</section>
+<section id="contiguous-memory">
+<h1>Contiguous Memory<a class="headerlink" href="#contiguous-memory" title="Permalink to this heading">#</a></h1>
+<ul class="simple">
+<li><p>A contiguous memory layout is one where there are no gaps between the elements.</p></li>
+<li><p>There is a fundamental ambiguity in how the higher-dimensional index is
+mapped back to 1D</p></li>
+</ul>
+<p>The 1D memory block can either be filled such that the elements in the <strong>rows</strong>
+are adjacent to each other in memory, or such that the elements in the <strong>columns</strong>
+are adjacent.</p>
+<p>For historcal reasons related to the <code class="docutils literal notranslate"><span class="pre">C</span></code> and <code class="docutils literal notranslate"><span class="pre">Fortran</span></code> programming languages,
+C-contiguous == row-major and F-contiguous == column-major</p>
+<section id="id2">
+<h2>Example<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
+<p>Let’s say we want to represent the following 2D array:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">[[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span>
+ <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span>
+ <span class="p">[</span><span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">]]</span>
+</pre></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span> <span class="p">[</span><span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">]],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="s2">&quot;C&quot;</span><span class="p">)</span>
+<span class="n">x</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[1, 2, 3],
+       [4, 5, 6],
+       [7, 8, 9]], dtype=uint8)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span><span class="o">.</span><span class="n">tobytes</span><span class="p">(</span><span class="s2">&quot;A&quot;</span><span class="p">)</span>  <span class="c1"># order=&quot;A&quot; preserves the ordering of the underlying memory buffer</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>b&#39;\x01\x02\x03\x04\x05\x06\x07\x08\t&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span><span class="o">.</span><span class="n">strides</span>  <span class="c1"># Last index &quot;varies the fastest&quot; (smallest stride)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(3, 1)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="s2">&quot;F&quot;</span><span class="p">)</span>  <span class="c1"># Same data stored in a different order</span>
+<span class="n">y</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[1, 2, 3],
+       [4, 5, 6],
+       [7, 8, 9]], dtype=uint8)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y</span><span class="o">.</span><span class="n">tobytes</span><span class="p">(</span><span class="s2">&quot;A&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>b&#39;\x01\x04\x07\x02\x05\x08\x03\x06\t&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y</span><span class="o">.</span><span class="n">strides</span>  <span class="c1"># First index &quot;varies the fastest&quot; (smallest stride)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(1, 3)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="question-is-it-possible-to-have-memory-layouts-that-are-neither-f-nor-c-contiguous">
+<h2>Question: Is it possible to have memory layouts that are neither F nor C contiguous?<a class="headerlink" href="#question-is-it-possible-to-have-memory-layouts-that-are-neither-f-nor-c-contiguous" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># What do you think?</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="another-question-is-it-possible-to-have-non-contiguous-memory-in-2d">
+<h2>Another Question: Is it possible to have non-contiguous memory in 2D?<a class="headerlink" href="#another-question-is-it-possible-to-have-non-contiguous-memory-in-2d" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># You tell me!</span>
+<span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="n">a</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 0,  1,  2,  3],
+       [ 4,  5,  6,  7],
+       [ 8,  9, 10, 11]])
+</pre></div>
+</div>
+</div>
+</div>
+<section id="aside">
+<h3>Aside<a class="headerlink" href="#aside" title="Permalink to this heading">#</a></h3>
+<p>Understanding the strided memory model can help you determine if/when numpy
+will copy data.</p>
+<ul class="simple">
+<li><p>NumPy generally tries not to copy data (see e.g. <code class="docutils literal notranslate"><span class="pre">reshape()</span></code>, <code class="docutils literal notranslate"><span class="pre">ravel()</span></code>), but
+sometimes there is no way to represent the output array with a given shape
+with only strides + data offset</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">b</span> <span class="o">=</span> <span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span><span class="o">.</span><span class="n">ravel</span><span class="p">()</span>  <span class="c1"># Returns a view</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">b</span><span class="o">.</span><span class="n">flags</span><span class="p">)</span>
+<span class="n">b</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  C_CONTIGUOUS : True
+  F_CONTIGUOUS : True
+  OWNDATA : False
+  WRITEABLE : True
+  ALIGNED : True
+  WRITEBACKIFCOPY : False
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([ 4,  5,  6,  7,  8,  9, 10, 11])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">c</span> <span class="o">=</span> <span class="n">a</span><span class="p">[:</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">ravel</span><span class="p">()</span>  <span class="c1"># Copies: no way to represent the raveled data with stride only</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">flags</span><span class="p">)</span>
+<span class="n">c</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  C_CONTIGUOUS : True
+  F_CONTIGUOUS : True
+  OWNDATA : True
+  WRITEABLE : True
+  ALIGNED : True
+  WRITEBACKIFCOPY : False
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([1, 2, 5, 6])
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+</section>
+<section id="the-power-of-the-strided-memory-model">
+<h1>The power of the strided memory model<a class="headerlink" href="#the-power-of-the-strided-memory-model" title="Permalink to this heading">#</a></h1>
+<ul class="simple">
+<li><p>Can represent any regular multidimensional data with only <code class="docutils literal notranslate"><span class="pre">shape</span></code>, and <code class="docutils literal notranslate"><span class="pre">strides</span></code>
+(and in some cases adjusting the <code class="docutils literal notranslate"><span class="pre">data</span></code> pointer)</p></li>
+</ul>
+<ul class="simple">
+<li><p>The same memory block can be viewed in different ways <em>without copying the data</em></p>
+<ul>
+<li><p>e.g. reshaping, transposing</p></li>
+<li><p>Also <strong>basic indexing</strong>, i.e. multi-dimensional slicing, which never copies data</p></li>
+</ul>
+</li>
+</ul>
+<ul class="simple">
+<li><p>Can have “virtual” dimensions by using strides of 0 -&gt; <strong>array broadcasting</strong></p>
+<ul>
+<li><p>Again, can help avoid copying data/allocating temporary arrays</p></li>
+</ul>
+</li>
+</ul>
+<p>For a more thorough treatment of the strided memory model, see:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://web.mit.edu/dvp/Public/numpybook.pdf">A Guide to NumPy (pdf)</a>, esp. Ch. 2.3</p></li>
+<li><p><a class="reference external" href="https://scipy-lectures.org/advanced/advanced_numpy/">Advanced NumPy in the scipy-lecture-notes</a></p></li>
+</ul>
+</section>
+<section id="some-caveats">
+<h1>Some caveats<a class="headerlink" href="#some-caveats" title="Permalink to this heading">#</a></h1>
+<ul class="simple">
+<li><p><em>Views</em> make it possible to work with large array data in a memory-efficient
+way, but there are some tradeoffs</p></li>
+</ul>
+<section id="contrived-example">
+<h2>Contrived example<a class="headerlink" href="#contrived-example" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="mi">20000</span><span class="p">,))</span>
+
+<span class="n">step</span> <span class="o">=</span> <span class="mi">128</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="mi">20000</span> <span class="o">*</span> <span class="n">step</span><span class="p">,))[::</span><span class="n">step</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">array_equal</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">timeit</span> a.sum()
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5.34 µs ± 53.4 ns per loop (mean ± std. dev. of 7 runs, 100,000 loops each)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">timeit</span> b.sum()
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>212 µs ± 16.8 µs per loop (mean ± std. dev. of 7 runs, 1,000 loops each)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="why">
+<h2>Why?<a class="headerlink" href="#why" title="Permalink to this heading">#</a></h2>
+<p><a class="reference external" href="https://scipy-lectures.org/advanced/advanced_numpy/#cpu-cache-effects">Check out the scipy lecture notes!</a></p>
+</section>
+<section id="slightly-less-contrived-example">
+<h2>(Slightly) less contrived example<a class="headerlink" href="#slightly-less-contrived-example" title="Permalink to this heading">#</a></h2>
+<p>The dreaded batch/channel swap!</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span><span class="mh">0xdeadc0de</span><span class="p">)</span>
+<span class="c1"># Simulate loading a stack of single-channel images from disk in channel order</span>
+<span class="c1"># e.g. data_in = np.array([tff.imread(f&quot;{ch}.tif&quot;) for ch in os.listdir(...)])</span>
+<span class="n">data_in</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">random</span><span class="p">((</span><span class="mi">40</span><span class="p">,</span> <span class="mi">1024</span><span class="p">,</span> <span class="mi">1024</span><span class="p">))</span>
+<span class="n">data_in</span><span class="o">.</span><span class="n">nbytes</span> <span class="o">/</span> <span class="mf">1e6</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>335.54432
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Some pre-processing prior to submitting to the model (thresholding, normalization, etc)</span>
+<span class="c1"># ...</span>
+<span class="c1"># Final step: swap batch and channel dims</span>
+<span class="n">data_in</span> <span class="o">=</span> <span class="n">data_in</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]</span>  <span class="c1"># Add a batch dimension</span>
+<span class="n">data_out</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">data_in</span><span class="p">,</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+<span class="n">data_out</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(1, 1024, 1024, 40)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">timeit</span> -n1 -r1 np.save(&quot;/tmp/cxyb.npz&quot;, data_out)
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.24 s ± 0 ns per loop (mean ± std. dev. of 1 run, 1 loop each)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Beware: ascontiguousarray copies the data! Still faster even with the copy</span>
+<span class="o">%</span><span class="k">timeit</span> -n1 -r1 np.save(&quot;/tmp/cxyb.npz&quot;, np.ascontiguousarray(data_out))
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>290 ms ± 0 ns per loop (mean ± std. dev. of 1 run, 1 loop each)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Even better - if you can engineer your pipeline to load memory from</span>
+<span class="c1"># disk in the order you want</span>
+<span class="n">data_out</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ascontiguousarray</span><span class="p">(</span><span class="n">data_out</span><span class="p">)</span>  <span class="c1"># i.e. no transpose was necessary</span>
+<span class="o">%</span><span class="k">timeit</span> -n1 -r1 np.save(&quot;/tmp/cxyb.npz&quot;, data_out)
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>136 ms ± 0 ns per loop (mean ± std. dev. of 1 run, 1 loop each)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="basic-indexing">
+<h1>Basic Indexing<a class="headerlink" href="#basic-indexing" title="Permalink to this heading">#</a></h1>
+<ul class="simple">
+<li><p><a class="reference external" href="https://numpy.org/doc/stable/user/basics.indexing.html#basic-indexing">Basic indexing</a> occurs whenever the indices are limited to scalars and slices</p></li>
+<li><p>Basic indexing always returns <em>views</em>, i.e. no data copying</p>
+<ul>
+<li><p>As mentioned, saves memory</p></li>
+<li><p>Modifications to either array affect the other, since they point to the
+same memory</p></li>
+</ul>
+</li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="n">a</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[[ 0,  1,  2],
+        [ 3,  4,  5]],
+
+       [[ 6,  7,  8],
+        [ 9, 10, 11]]])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">b</span> <span class="o">=</span> <span class="n">a</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># Equivalent to ravel()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">b</span><span class="p">[</span><span class="mi">3</span><span class="p">:</span><span class="mi">9</span><span class="p">]</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">a</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[[  0,   1,   2],
+        [100, 100, 100]],
+
+       [[100, 100, 100],
+        [  9,  10,  11]]])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1000</span>
+<span class="n">b</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([   0,    1,    2,  100,  100,  100, 1000, 1000, 1000, 1000, 1000,
+       1000])
+</pre></div>
+</div>
+</div>
+</div>
+<section id="example-tiling">
+<h2>Example: Tiling<a class="headerlink" href="#example-tiling" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">tifffile</span> <span class="k">as</span> <span class="nn">tff</span>
+<span class="c1"># Image from deepcell intro</span>
+<span class="n">img</span> <span class="o">=</span> <span class="n">tff</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="s2">&quot;data/example_input_combined.tif&quot;</span><span class="p">)</span>
+<span class="n">img</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(2, 512, 512)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">a</span><span class="p">,</span> <span class="n">im</span><span class="p">,</span> <span class="n">ttl</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">ax</span><span class="o">.</span><span class="n">ravel</span><span class="p">(),</span> <span class="n">img</span><span class="p">,</span> <span class="p">(</span><span class="s2">&quot;nuclear&quot;</span><span class="p">,</span> <span class="s2">&quot;membrane&quot;</span><span class="p">)):</span>
+    <span class="n">a</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">im</span><span class="p">)</span>
+    <span class="n">a</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">ttl</span><span class="o">.</span><span class="n">capitalize</span><span class="p">()</span><span class="si">}</span><span class="s2"> channel&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/1f124c878260267e2c7e260b0474aaba27af9f0dbb9f370c82ae59633d4ad671.png" src="_images/1f124c878260267e2c7e260b0474aaba27af9f0dbb9f370c82ae59633d4ad671.png" />
+</div>
+</div>
+<p>For the sake of argument, let’s say the input layer requires images of shape
+100x100 pixels.</p>
+<p>A common pattern:</p>
+<ul class="simple">
+<li><p>Pad the input image so that the tile size partitions the space evenly</p></li>
+<li><p>Allocate an output array with shape <code class="docutils literal notranslate"><span class="pre">(num_tiles,</span> <span class="pre">w,</span> <span class="pre">h,</span> <span class="pre">num_channels)</span></code></p></li>
+<li><p>Populate this array, keeping a separate mapping of tile -&gt; coordinates in
+the original image</p></li>
+</ul>
+<p>Something like:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tile_size</span> <span class="o">=</span> <span class="mi">100</span>  <span class="c1"># in both w &amp; h dimensions</span>
+<span class="n">img</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(2, 512, 512)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Therefore...</span>
+<span class="n">desired_shape</span> <span class="o">=</span> <span class="mi">600</span>
+<span class="n">pad_size</span> <span class="o">=</span> <span class="p">(</span><span class="n">desired_shape</span> <span class="o">-</span> <span class="n">img</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">//</span> <span class="mi">2</span>
+<span class="n">pad_size</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>44
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">img_padded</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">pad</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="n">pad_size</span><span class="p">,)</span><span class="o">*</span><span class="mi">2</span><span class="p">,</span> <span class="p">(</span><span class="n">pad_size</span><span class="p">,)</span><span class="o">*</span><span class="mi">2</span><span class="p">))</span>
+<span class="n">img_padded</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(2, 600, 600)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">a</span><span class="p">,</span> <span class="n">im</span><span class="p">,</span> <span class="n">tt</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">ax</span><span class="o">.</span><span class="n">ravel</span><span class="p">(),</span> <span class="n">img_padded</span><span class="p">,</span> <span class="p">(</span><span class="s2">&quot;nuclear&quot;</span><span class="p">,</span> <span class="s2">&quot;membrane&quot;</span><span class="p">)):</span>
+    <span class="n">a</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">im</span><span class="p">)</span>
+    <span class="n">a</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">ttl</span><span class="o">.</span><span class="n">capitalize</span><span class="p">()</span><span class="si">}</span><span class="s2"> channel&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/e6548f695d66acb36a29879a00a26179193b447d898b102e19fc6c8cf8cbc510.png" src="_images/e6548f695d66acb36a29879a00a26179193b447d898b102e19fc6c8cf8cbc510.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model_input</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span>
+    <span class="p">((</span><span class="n">img_padded</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">//</span> <span class="n">tile_size</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="n">tile_size</span><span class="p">,</span> <span class="n">tile_size</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span>
+    <span class="n">dtype</span><span class="o">=</span><span class="n">img_padded</span><span class="o">.</span><span class="n">dtype</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">model_input</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(36, 100, 100, 2)
+</pre></div>
+</div>
+</div>
+</div>
+<p>From here:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># for idx, tile in enumerate(image):</span>
+<span class="c1">#     model_input[i] = tile</span>
+<span class="c1"># batch_size = blah</span>
+<span class="c1"># for i in range(0, model_input.shape[0], batch_size):</span>
+<span class="c1">#     batch_out = model.predict(model_input[i:i+batch_size, ...]</span>
+<span class="c1"># etc.</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>One drawback: pre-allocating <code class="docutils literal notranslate"><span class="pre">model_input</span></code> means you need 2x the amount of
+memory as the input image.</p>
+<ul>
+<li><p>Can become an issue for larger images, especially if they’re multiplexed etc.</p></li>
+</ul>
+</li>
+</ul>
+<p>What if instead we created a <em>mapping</em> of tiles to their original slices.</p>
+<ul class="simple">
+<li><p>Reduces the pre-model memory footprint by factor of 2</p></li>
+<li><p>Use the same mapping to “untile” the output image</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">step</span> <span class="o">=</span> <span class="mi">100</span>
+
+<span class="n">tiles</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">for</span> <span class="n">xstart</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">img_padded</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">step</span><span class="o">=</span><span class="n">step</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">ystart</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">img_padded</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">step</span><span class="o">=</span><span class="n">step</span><span class="p">):</span>
+        <span class="n">xbounds</span><span class="p">,</span> <span class="n">ybounds</span> <span class="o">=</span> <span class="p">(</span><span class="n">xstart</span><span class="p">,</span> <span class="n">xstart</span> <span class="o">+</span> <span class="n">step</span><span class="p">),</span> <span class="p">(</span><span class="n">ystart</span><span class="p">,</span> <span class="n">ystart</span> <span class="o">+</span> <span class="n">step</span><span class="p">)</span>
+        <span class="n">xslice</span><span class="p">,</span> <span class="n">yslice</span> <span class="o">=</span> <span class="nb">slice</span><span class="p">(</span><span class="o">*</span><span class="n">xbounds</span><span class="p">),</span> <span class="nb">slice</span><span class="p">(</span><span class="o">*</span><span class="n">ybounds</span><span class="p">)</span>
+        <span class="n">tiles</span><span class="p">[(</span><span class="n">xbounds</span><span class="p">,</span> <span class="n">ybounds</span><span class="p">)]</span> <span class="o">=</span> <span class="n">img_padded</span><span class="p">[:,</span> <span class="n">xslice</span><span class="p">,</span> <span class="n">yslice</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tiles</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>dict_keys([((0, 100), (0, 100)), ((0, 100), (100, 200)), ((0, 100), (200, 300)), ((0, 100), (300, 400)), ((0, 100), (400, 500)), ((0, 100), (500, 600)), ((100, 200), (0, 100)), ((100, 200), (100, 200)), ((100, 200), (200, 300)), ((100, 200), (300, 400)), ((100, 200), (400, 500)), ((100, 200), (500, 600)), ((200, 300), (0, 100)), ((200, 300), (100, 200)), ((200, 300), (200, 300)), ((200, 300), (300, 400)), ((200, 300), (400, 500)), ((200, 300), (500, 600)), ((300, 400), (0, 100)), ((300, 400), (100, 200)), ((300, 400), (200, 300)), ((300, 400), (300, 400)), ((300, 400), (400, 500)), ((300, 400), (500, 600)), ((400, 500), (0, 100)), ((400, 500), (100, 200)), ((400, 500), (200, 300)), ((400, 500), (300, 400)), ((400, 500), (400, 500)), ((400, 500), (500, 600)), ((500, 600), (0, 100)), ((500, 600), (100, 200)), ((500, 600), (200, 300)), ((500, 600), (300, 400)), ((500, 600), (400, 500)), ((500, 600), (500, 600))])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">();</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">tiles</span><span class="p">[((</span><span class="mi">300</span><span class="p">,</span> <span class="mi">400</span><span class="p">),</span> <span class="p">(</span><span class="mi">300</span><span class="p">,</span> <span class="mi">400</span><span class="p">))][</span><span class="mi">0</span><span class="p">,</span> <span class="o">...</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x7f4490bd5e90&gt;
+</pre></div>
+</div>
+<img alt="_images/c86844d38adfe528baa8f1b0c6abfd21574570580409d2bf9a7600b079aab408.png" src="_images/c86844d38adfe528baa8f1b0c6abfd21574570580409d2bf9a7600b079aab408.png" />
+</div>
+</div>
+<p>Now, the batch loop would look something like:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Pick whatever we want, though the below assumes that the total number of</span>
+<span class="c1"># tiles is divisble by batch size (easy to generalize)</span>
+<span class="n">batch_size</span> <span class="o">=</span> <span class="mi">4</span>
+
+<span class="c1"># Let&#39;s assume the model takes in 2-channel images, and spits out single-channel</span>
+<span class="c1"># predictions.</span>
+<span class="n">model_output</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">img_padded</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
+
+<span class="c1"># The total CPU memory allocation is now: img_padded.nbytes + batch.nbytes +</span>
+<span class="c1"># model_output.nbytes</span>
+<span class="n">batch</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">batch_size</span><span class="p">,</span> <span class="n">tile_size</span><span class="p">,</span> <span class="n">tile_size</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>  <span class="c1"># Simple example: square images</span>
+<span class="n">bounds</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">batch_size</span><span class="p">))</span>  <span class="c1"># For holding tile indices over batching</span>
+<span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="p">((</span><span class="n">xb</span><span class="p">,</span> <span class="n">yb</span><span class="p">),</span> <span class="n">tile</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">tiles</span><span class="o">.</span><span class="n">items</span><span class="p">()):</span>
+    <span class="n">batch</span><span class="p">[</span><span class="n">idx</span> <span class="o">%</span> <span class="n">batch_size</span><span class="p">]</span> <span class="o">=</span> <span class="n">tile</span><span class="o">.</span><span class="n">transpose</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+    <span class="n">bounds</span><span class="p">[</span><span class="n">idx</span> <span class="o">%</span> <span class="n">batch_size</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="nb">slice</span><span class="p">(</span><span class="o">*</span><span class="n">xb</span><span class="p">),</span> <span class="nb">slice</span><span class="p">(</span><span class="o">*</span><span class="n">yb</span><span class="p">))</span>
+    <span class="c1"># Send batch to model for prediction, and map results back to the</span>
+    <span class="c1"># pre-allocated output image</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">idx</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="n">batch_size</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="c1"># World&#39;s worst deep learning model: sum the channels</span>
+        <span class="c1"># Just transforming data to the appropriate shape for illustration purposes</span>
+        <span class="n">output</span> <span class="o">=</span> <span class="n">batch</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="c1"># Map prediction to output image</span>
+        <span class="k">for</span> <span class="n">loc</span><span class="p">,</span> <span class="n">prediction</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">bounds</span><span class="p">,</span> <span class="n">output</span><span class="p">):</span>
+            <span class="n">model_output</span><span class="p">[</span><span class="n">loc</span><span class="p">]</span> <span class="o">=</span> <span class="n">prediction</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Our “model” simply combined the channels - let’s see how it did:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">img_padded</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="o">...</span><span class="p">])</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">img_padded</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="o">...</span><span class="p">])</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">model_output</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x7f4490831850&gt;
+</pre></div>
+</div>
+<img alt="_images/bd2374a7b3962c75506bee5ccfa9e3e02c066a1d53b308a81e779c5a852497ea.png" src="_images/bd2374a7b3962c75506bee5ccfa9e3e02c066a1d53b308a81e779c5a852497ea.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">model_output</span><span class="p">,</span> <span class="n">img_padded</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+</div>
+</div>
+<p>Seems… fine.</p>
+<p>Not the clearest code but also not an unreasonable refactor to reduce
+total memory footprint.</p>
+<p>What about padding though, there’s something unsatisfying about that…</p>
+<ul class="simple">
+<li><p>For one thing, our data efficiency is not very good:</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">img</span><span class="o">.</span><span class="n">nbytes</span> <span class="o">/</span> <span class="n">img_padded</span><span class="o">.</span><span class="n">nbytes</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.7281777777777778
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>A decent chunk of the data we transfer over to the GPU(s) is just cruft from
+zero-padding</p>
+<ul>
+<li><p>Even if the model is doing masked computation, still a waste of GPU memory</p></li>
+</ul>
+</li>
+</ul>
+<ul class="simple">
+<li><p>What if instead of padding, we wanted to do overlapping tiles?</p></li>
+</ul>
+<ul class="simple">
+<li><p>This is mostly an excuse to show a little-known numpy feature that makes
+extensive use of the strided memory model: <code class="docutils literal notranslate"><span class="pre">sliding_window_view</span></code></p>
+<ul>
+<li><p>Who says location in the memory buffer has to have a <em>unique</em> multidimensional
+index?!</p></li>
+</ul>
+</li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">img</span><span class="o">.</span><span class="n">shape</span>  <span class="c1"># A reminder...</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(2, 512, 512)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">strided</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">lib</span><span class="o">.</span><span class="n">stride_tricks</span><span class="o">.</span><span class="n">sliding_window_view</span><span class="p">(</span>
+    <span class="n">img</span><span class="p">,</span> <span class="n">window_shape</span><span class="o">=</span><span class="p">(</span><span class="n">step</span><span class="p">,</span> <span class="n">step</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="p">)</span>
+<span class="n">strided</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(2, 413, 413, 100, 100)
+</pre></div>
+</div>
+</div>
+</div>
+<p>We now have a <code class="docutils literal notranslate"><span class="pre">2</span> <span class="pre">x</span> <span class="pre">(width</span> <span class="pre">-</span> <span class="pre">step)</span> <span class="pre">x</span> <span class="pre">(height</span> <span class="pre">-</span> <span class="pre">step)</span></code> array of <code class="docutils literal notranslate"><span class="pre">step</span> <span class="pre">x</span> <span class="pre">step</span></code> tiles!</p>
+<p>We could use this sliding window view to construct a 6x6 grid of tiles with
+basic indexing:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">grid_size</span> <span class="o">=</span> <span class="mi">6</span>  <span class="c1"># From previous example</span>
+<span class="n">grid_stride</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="n">strided</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">/</span> <span class="n">grid_size</span><span class="p">))</span>
+<span class="n">tile_grid</span> <span class="o">=</span> <span class="n">strided</span><span class="p">[:,</span> <span class="p">::</span><span class="n">grid_stride</span><span class="p">,</span> <span class="p">::</span><span class="n">grid_stride</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span>
+<span class="n">tile_grid</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(2, 6, 6, 100, 100)
+</pre></div>
+</div>
+</div>
+</div>
+<p>How does it look? Let’s compare the top row of tiles for the nuclear channel:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">img</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:</span><span class="mi">100</span><span class="p">,</span> <span class="p">:])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x7f44908e79d0&gt;
+</pre></div>
+</div>
+<img alt="_images/e445211931fa8283b6117ca9b678fa08f8648a4caf8962709595edde39eb05e9.png" src="_images/e445211931fa8283b6117ca9b678fa08f8648a4caf8962709595edde39eb05e9.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">grid_size</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+<span class="n">vmax</span> <span class="o">=</span> <span class="n">img</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:</span><span class="mi">100</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>  <span class="c1"># So that all tiles have the same color range</span>
+
+<span class="k">for</span> <span class="n">tile</span><span class="p">,</span> <span class="n">a</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">tile_grid</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="p">:,</span> <span class="o">...</span><span class="p">],</span> <span class="n">ax</span><span class="o">.</span><span class="n">ravel</span><span class="p">()):</span>
+    <span class="n">a</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">tile</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="n">vmax</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/33db6f291fa0277472d8ecfe55a022a9a909f06d5afbd43d80bfcf17bd8389a1.png" src="_images/33db6f291fa0277472d8ecfe55a022a9a909f06d5afbd43d80bfcf17bd8389a1.png" />
+</div>
+</div>
+<p>Could this be improved? How would you do it?</p>
+<p>A quirk:</p>
+<div class="cell tag_raises-exception docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tile_grid</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:,</span> <span class="o">...</span><span class="p">]</span> <span class="o">/=</span> <span class="n">vmax</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ValueError</span><span class="g g-Whitespace">                                </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">58</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">tile_grid</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:,</span> <span class="o">...</span><span class="p">]</span> <span class="o">/=</span> <span class="n">vmax</span>
+
+<span class="ne">ValueError</span>: output array is read-only
+</pre></div>
+</div>
+</div>
+</div>
+<section id="id3">
+<h3>Why?<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tile_grid</span><span class="o">.</span><span class="n">flags</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  C_CONTIGUOUS : False
+  F_CONTIGUOUS : False
+  OWNDATA : False
+  WRITEABLE : False
+  ALIGNED : True
+  WRITEBACKIFCOPY : False
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="takeaways-from-tiling">
+<h2>Takeaways from tiling<a class="headerlink" href="#takeaways-from-tiling" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Basic indexing can really help reduce the memory footprint of code.</p></li>
+<li><p>May require re-thinking your analysis to take full advantage of memory views</p></li>
+</ul>
+</section>
+</section>
+<section id="advanced-indexing">
+<h1>Advanced indexing<a class="headerlink" href="#advanced-indexing" title="Permalink to this heading">#</a></h1>
+<ul class="simple">
+<li><p><a class="reference external" href="https://numpy.org/doc/stable/user/basics.indexing.html#advanced-indexing">Advanced indexing</a> is triggered when the indexing object (i.e. the
+thing inside the brackets) is a non-tuple sequence object.</p></li>
+<li><p>Two primary use-cases:</p>
+<ul>
+<li><p><strong>Boolean indexing</strong>: conditional selection of values</p></li>
+<li><p><strong>Array indexing</strong>: selecting values in an array by their coordinates</p></li>
+</ul>
+</li>
+</ul>
+<ul class="simple">
+<li><p>Advanced indexing <em>always</em> creates copies</p></li>
+</ul>
+<ul class="simple">
+<li><p>The result of an advanced indexing operation is 1D</p></li>
+</ul>
+<!-- TODO: Add label image remapping example -->
+<section id="example-julia-sets">
+<h2>Example: Julia sets<a class="headerlink" href="#example-julia-sets" title="Permalink to this heading">#</a></h2>
+<p>Use Boolean masking to limit the computation to the relevant subset of data</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Complex plane spanning [-2, 2], [-2i, 2i]</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2000</span><span class="p">)</span>
+<span class="n">z</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="n">x</span><span class="p">[:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]</span><span class="o">*</span><span class="mi">1</span><span class="n">j</span>
+
+<span class="c1"># Keep track of when values in the plane diverge under iterative function application</span>
+<span class="n">div_step</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">z</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">)</span>
+
+<span class="c1"># f(z) = z**2 - 1</span>
+<span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+    <span class="n">div_step</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">z</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">2.0</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>  <span class="c1"># Increment counter at values below the divergence thresh</span>
+    <span class="n">z</span> <span class="o">=</span> <span class="n">z</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">-</span> <span class="mi">1</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_42063/2169131159.py:11: RuntimeWarning: overflow encountered in square
+  z = z ** 2 - 1
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">div_step</span><span class="p">,</span> <span class="n">extent</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x7f4490a15e90&gt;
+</pre></div>
+</div>
+<img alt="_images/2514989fcea29ecd37746c18d02745faf8eb9e0c7209376267b45c053ccb601e.png" src="_images/2514989fcea29ecd37746c18d02745faf8eb9e0c7209376267b45c053ccb601e.png" />
+</div>
+</div>
+<p>Cool.</p>
+<p>Can we improve this?</p>
+<p>We only need to compute the subsequent iterations for values that have note
+yet diverged!</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">z</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="n">x</span><span class="p">[:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]</span><span class="o">*</span><span class="mi">1</span><span class="n">j</span>
+<span class="n">div_step</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">z</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">)</span>
+
+<span class="c1"># f(z) = z**2 - 1</span>
+<span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+    <span class="n">conv_mask</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">z</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">2.0</span>
+    <span class="n">div_step</span><span class="p">[</span><span class="n">conv_mask</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>  <span class="c1"># Increment counter at values below the divergence thresh</span>
+    <span class="n">z</span><span class="p">[</span><span class="n">conv_mask</span><span class="p">]</span> <span class="o">=</span> <span class="n">z</span><span class="p">[</span><span class="n">conv_mask</span><span class="p">]</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">-</span> <span class="mi">1</span>
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>Improved performance</p></li>
+<li><p>Get rid of invalid value warnings</p></li>
+</ul>
+<p>For more on fractal geometry and iterative analysis, check out:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://matplotlib.org/stable/gallery/showcase/mandelbrot.html">The matplotlib gallery</a></p></li>
+<li><p><a class="reference external" href="https://numpy.org/numpy-tutorials/content/tutorial-plotting-fractals.html">NumPy Tutorials</a></p></li>
+</ul>
+</section>
+<section id="advanced-indexing-arrays-of-indices">
+<h2>Advanced Indexing: Arrays of indices<a class="headerlink" href="#advanced-indexing-arrays-of-indices" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Useful for assigning to/extracting from arrays by coordinate location</p></li>
+<li><p>e.g. an upper triangular array</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">16</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="n">tril_idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">tril_indices</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">tril_idx</span>  <span class="c1"># 2 arrays of same length with x and y coords, respectively</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(array([0, 1, 1, 2, 2, 2, 3, 3, 3, 3]), array([0, 0, 1, 0, 1, 2, 0, 1, 2, 3]))
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="p">[</span><span class="n">tril_idx</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">a</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 0,  1,  2,  3],
+       [ 0,  0,  6,  7],
+       [ 0,  0,  0, 11],
+       [ 0,  0,  0,  0]])
+</pre></div>
+</div>
+</div>
+</div>
+<section id="mapping-points-to-coordinates">
+<h3>Mapping points to coordinates<a class="headerlink" href="#mapping-points-to-coordinates" title="Permalink to this heading">#</a></h3>
+<p>For example, generating a binary occupancy mask from a collection of 3D points:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>head<span class="w"> </span>data/neuron_trace.csv
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span># pid, type, x, y, z, parent_type, parent
+47 3 1065.49 1053.76 67.636 1 46
+48 3 1070.85 1057.93 66.902 1 47
+49 3 1077.8 1060.61 67.083 1 48
+50 3 1083.38 1062.99 66.345 1 49
+51 3 1088.71 1064.36 65.355 1 50
+52 3 1094.01 1067.3 64.769 1 51
+53 3 1099.07 1071.21 64.793 1 52
+54 3 1104.54 1073.35 64.774 1 53
+55 3 1110.45 1074.65 63.986 1 54
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">xyz</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span>
+    <span class="s2">&quot;data/neuron_trace.csv&quot;</span><span class="p">,</span> <span class="n">comments</span><span class="o">=</span><span class="s2">&quot;#&quot;</span><span class="p">,</span> <span class="n">usecols</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="n">unpack</span><span class="o">=</span><span class="kc">False</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">,</span> <span class="n">projection</span><span class="o">=</span><span class="s2">&quot;3d&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">scatter3D</span><span class="p">(</span><span class="o">*</span><span class="n">xyz</span><span class="o">.</span><span class="n">T</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/e129dd54ac2fa4b109920c4717aab4d09b8df9a90ff6b995e94ae374c1d34eac.png" src="_images/e129dd54ac2fa4b109920c4717aab4d09b8df9a90ff6b995e94ae374c1d34eac.png" />
+</div>
+</div>
+<p>Generating an occupancy mask with advanced indexing:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">occ_mask</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">2048</span><span class="p">,</span> <span class="mi">2048</span><span class="p">,</span> <span class="mi">127</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">bool</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Naive conversion of point locations to coordinate grid by casting to int</span>
+<span class="n">idx</span> <span class="o">=</span> <span class="n">xyz</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">intp</span><span class="p">)</span>
+<span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span> <span class="o">=</span> <span class="n">idx</span><span class="o">.</span><span class="n">T</span>  <span class="c1"># Unpack</span>
+<span class="n">occ_mask</span><span class="p">[</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="n">occ_mask</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>98
+</pre></div>
+</div>
+</div>
+</div>
+<!-- TODO Broadcasting: example from 2011 paper here --></section>
+</section>
+</section>
+<section id="miscellania">
+<h1>Miscellania<a class="headerlink" href="#miscellania" title="Permalink to this heading">#</a></h1>
+<p>I’ve learned a lot from participating in the NumPy community (anyone would!)</p>
+<p>Here’s an unstructured collection of do-s, don’t-s (guidelines of course, no rules!)
+and other common issues.</p>
+</section>
+<section id="don-t-use-maskedarray">
+<h1>Don’t use <code class="docutils literal notranslate"><span class="pre">MaskedArray</span></code><a class="headerlink" href="#don-t-use-maskedarray" title="Permalink to this heading">#</a></h1>
+<ul class="simple">
+<li><p>Boolean masks often get re-used, modified… might it make sense to tie them
+to the underlying data?</p></li>
+<li><p>NumPy provides a subclass of ndarray to do so: <code class="docutils literal notranslate"><span class="pre">np.ma.MaskedArray</span></code></p>
+<ul>
+<li><p>Stores data + mask in the same structure</p></li>
+</ul>
+</li>
+<li><p>Why not to use it?</p>
+<ul>
+<li><p>From experience, there are many little incosistencies in how MaskedArray
+objects are treated within numpy.</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="don-t-use-np-matrix">
+<h1>Don’t use <code class="docutils literal notranslate"><span class="pre">np.matrix</span></code><a class="headerlink" href="#don-t-use-np-matrix" title="Permalink to this heading">#</a></h1>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">matrix</span></code> is another subclass of <code class="docutils literal notranslate"><span class="pre">ndarray</span></code> that has different semantics, most
+notably:</p>
+<ul>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">*</span></code> operater is treated as matrix multiplication, not element-wise
+multiplication</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">matrix</span></code> objects are always two-dimensional</p></li>
+</ul>
+</li>
+</ul>
+<p>This latter point can cause real headaches, especially in the context of
+reduction operations:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">m</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matrix</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">6</span><span class="p">))</span>
+<span class="n">m</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># !</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>matrix([[1.],
+        [1.],
+        [1.],
+        [1.],
+        [1.],
+        [1.]])
+</pre></div>
+</div>
+</div>
+</div>
+<p>Subtle differences and chance for silently incorrect results due to e.g. broadcasting</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">random</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="n">a</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="o">+</span> <span class="n">a</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([2.27886604, 3.50314909, 3.7282447 ])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">m</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matrix</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="n">m</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="o">+</span> <span class="n">m</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>matrix([[2.27886604, 2.87753302, 2.80617009],
+        [2.9044821 , 3.50314909, 3.43178616],
+        [3.20094065, 3.79960763, 3.7282447 ]])
+</pre></div>
+</div>
+</div>
+</div>
+<section id="why-is-matrix-still-around">
+<h2>Why is <code class="docutils literal notranslate"><span class="pre">matrix</span></code> still around?<a class="headerlink" href="#why-is-matrix-still-around" title="Permalink to this heading">#</a></h2>
+<p>Largely because of <code class="docutils literal notranslate"><span class="pre">scipy.sparse</span></code>, which provides sparse data structures that
+unfortunately implement <em>matrix semantics</em> rather than <em>array semantics</em>.</p>
+<p>A sparse <em>array</em> container is under active development!</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">scipy</span> <span class="k">as</span> <span class="nn">sp</span>
+<span class="n">a</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">sparse</span><span class="o">.</span><span class="n">csr_array</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">]])</span>
+<span class="n">a</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;3x4 sparse array of type &#39;&lt;class &#39;numpy.int64&#39;&gt;&#39;
+	with 6 stored elements in Compressed Sparse Row format&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([ 4, 10,  2, 11])
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>Lot’s of opportunity to contribute to sparse data formats for the ecosystem!</p></li>
+</ul>
+</section>
+</section>
+<section id="check-out-the-new-numpy-random-interface">
+<h1>Check out the “new” <a class="reference external" href="https://numpy.org/devdocs/reference/random/index.html">numpy.random interface</a><a class="headerlink" href="#check-out-the-new-numpy-random-interface" title="Permalink to this heading">#</a></h1>
+<ul class="simple">
+<li><p>Available since version 1.17</p></li>
+<li><p>Better computational performance and statistical properties</p>
+<ul>
+<li><p>No more global state</p></li>
+<li><p><a class="reference external" href="https://numpy.org/devdocs/reference/random/new-or-different.html">Similar (but not identical) interface</a></p></li>
+<li><p>New features for parallel generation</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="finding-the-right-tool-for-the-job">
+<h1>Finding the right tool for the job<a class="headerlink" href="#finding-the-right-tool-for-the-job" title="Permalink to this heading">#</a></h1>
+<ul class="simple">
+<li><p>For tabular data, consider <a class="reference external" href="https://pandas.pydata.org/"><code class="docutils literal notranslate"><span class="pre">pandas</span></code></a> (instead of structured dtypes)</p></li>
+<li><p>To expand the concept of labeled data to higher dimensions, check out
+<a class="reference external" href="https://docs.xarray.dev/en/stable/"><code class="docutils literal notranslate"><span class="pre">xarray</span></code></a></p></li>
+<li><p>For out-of-memory data needs, consider tools that offer familiar interfaces to
+disk-backed data, like <a class="reference external" href="https://www.pytables.org/"><code class="docutils literal notranslate"><span class="pre">tables</span> <span class="pre">(HDF5)</span></code></a> or
+<a class="reference external" href="https://www.dask.org/"><code class="docutils literal notranslate"><span class="pre">dask</span></code></a></p></li>
+<li><p>For sparse data, consider <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/sparse.html"><code class="docutils literal notranslate"><span class="pre">scipy.sparse</span></code></a> or <a class="reference external" href="https://sparse.pydata.org/en/stable/">pydata-sparse</a></p></li>
+<li><p>For “ragged” arrays, consider a sparse format or <a class="reference external" href="https://awkward-array.org/doc/main/index.html">Awkward Array</a></p></li>
+<li><p>For high-level, general-purpose GPU programming check out <a class="reference external" href="https://cupy.dev/"><code class="docutils literal notranslate"><span class="pre">cupy</span></code></a>.</p></li>
+</ul>
+<p><strong>Disclaimer:</strong> This is just off the top of my head. This is not a comprehensive
+listing of tools I recommend over all others, but rather the first places I
+would (or in some cases do) look first when I encounter a certain type of problem/data.</p>
+</section>
+<section id="don-t-forget-about-python-s-data-structures">
+<h1>Don’t forget about Python’s data structures!<a class="headerlink" href="#don-t-forget-about-python-s-data-structures" title="Permalink to this heading">#</a></h1>
+<ul class="simple">
+<li><p>A common pattern amongst users: NumPy is written in C, so it’s faster across
+the board.</p></li>
+</ul>
+<ul class="simple">
+<li><p>Not so fast: choosing the right data structure is important!</p></li>
+</ul>
+<section id="trivial-example">
+<h2>Trivial example<a class="headerlink" href="#trivial-example" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">()</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">integers</span><span class="p">(</span><span class="n">low</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">high</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="mf">1e7</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>Now let’s say you have a task that involves repeatedly checking whether or not
+a value is in this dataset. No problem!:</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">val</span> <span class="o">=</span> <span class="mi">6000</span>
+<span class="n">val</span> <span class="ow">in</span> <span class="n">data</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>False
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>But wait… this has to search through <em>all</em> of <code class="docutils literal notranslate"><span class="pre">data</span></code> to determine whether
+<code class="docutils literal notranslate"><span class="pre">val</span></code> is present.</p>
+<ul>
+<li><p>We know a-priori that there are duplicate values in our dataset, so we can
+optimize this task by only searching over <em>unique</em> values in <code class="docutils literal notranslate"><span class="pre">data</span></code>.</p></li>
+</ul>
+</li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">uniq_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="n">val</span> <span class="ow">in</span> <span class="n">uniq_data</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>False
+</pre></div>
+</div>
+</div>
+</div>
+<p>How much did we improve?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">timeit</span> -n 1 -r 1 val in data
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>6.35 ms ± 0 ns per loop (mean ± std. dev. of 1 run, 1 loop each)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">timeit</span> -n 1 -r 1 val in uniq_data
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>63.1 µs ± 0 ns per loop (mean ± std. dev. of 1 run, 1 loop each)
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>Great! An optimized implementation, and still readable!</p></li>
+</ul>
+<ul class="simple">
+<li><p>But wait… IIRC from CS1, membership testing is <code class="docutils literal notranslate"><span class="pre">O(n)</span></code> for lists. Is there
+a better way?</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">set_data</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">timeit</span> -n 1 -r 1 val in uniq_data
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>37.3 µs ± 0 ns per loop (mean ± std. dev. of 1 run, 1 loop each)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">timeit</span> -n 1 -r 1 val in set_data
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>641 ns ± 0 ns per loop (mean ± std. dev. of 1 run, 1 loop each)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Cost of construction:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">timeit</span> -n 1 -r 1 uniq_data = np.unique(data)
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>433 ms ± 0 ns per loop (mean ± std. dev. of 1 run, 1 loop each)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">timeit</span> -n 1 -r 1 set_data = set(data)
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>589 ms ± 0 ns per loop (mean ± std. dev. of 1 run, 1 loop each)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="takeaway">
+<h2>Takeaway<a class="headerlink" href="#takeaway" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Binary extensions do not always equal better performance.</p></li>
+</ul>
+<ul class="simple">
+<li><p>Python has many excellent built-in data structures. Learning to use them
+together with Scientific Python will improve your code.</p></li>
+</ul>
+<ul class="simple">
+<li><p>I strongly recommend <a class="reference external" href="https://www.oreilly.com/library/view/fluent-python-2nd/9781492056348/">Fluent Python</a></p></li>
+</ul>
+</section>
+</section>
+<section id="general-takeaways">
+<h1>General Takeaways<a class="headerlink" href="#general-takeaways" title="Permalink to this heading">#</a></h1>
+<ul class="simple">
+<li><p>Developing a stronger understanding of the underlying memory model of any
+data structure is important!</p>
+<ul>
+<li><p>Especially as things scale!</p></li>
+</ul>
+</li>
+</ul>
+<ul class="simple">
+<li><p>Often a fundamental tradeoff between computation time and memory requirements</p>
+<ul>
+<li><p>Which end up being bottlenecks ends up being problem/data scale dependent</p></li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<div><p>The real problem is that programmers have spent far too much time worrying
+about efficiency in the wrong places and at the wrong times;
+<strong>premature optimization is the root of all evil (or at least most of it) in programming</strong></p>
+<ul class="simple">
+<li><p>Donald Knuth, The Art of Computer Programming</p></li>
+</ul>
+</div></blockquote>
+<ul class="simple">
+<li><p>Relevant <a class="reference external" href="https://xkcd.com/1205/">xkcd</a></p></li>
+</ul>
+<ul class="simple">
+<li><p>Avoid <em>paralysis by analysis</em></p>
+<ul>
+<li><p>The real power of Python is enabling analysts to explore, express, and
+communicate analyses. If you spend all your time worrying about whether
+something is written “well”, it defeats the purpose</p></li>
+<li><p>Problems/bottlenecks will naturally present themselves with scale. The
+“art” of scientific computing is knowing where they arise (or at least how
+to <em>investigate</em> how they arise), and how best to solve them.</p></li>
+<li><p>Solve problems with performance as they arise, rather than over-engineering
+for things you expect <em>might become</em> problems.</p></li>
+</ul>
+</li>
+</ul>
+<ul class="simple">
+<li><p>In my experience, focusing on clear expression of ideas in code is far more
+beneficial than worrying about optimal/performant solutions.</p>
+<ul>
+<li><p>Until you have a good idea what the bottlenecks are, at least.</p></li>
+</ul>
+</li>
+</ul>
+<ul class="simple">
+<li><p>Collaboration is the fastest way to improve as a programmer</p>
+<ul>
+<li><p>Don’t be afraid of sharing your code because it’s “bad”!</p></li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<div><p>The best way to get the right answer is to put the wrong answer on the
+internet</p>
+<ul class="simple">
+<li><p>Anonymous</p></li>
+</ul>
+</div></blockquote>
+<ul class="simple">
+<li><p>But… there are a lot of jerks out there: find people that you like
+working with (and try not to be one of the jerks!)</p></li>
+</ul>
+<p>Interested in open source? Scientific software? Python? Any/all of the above?</p>
+<center>
+Let's chat! 
+<p>rossbar&#64;caltech.edu</p>
+</center>
+<!--
+% XArray example: CODEX data
+
+% Advanced indexing
+% Also indices: 2 examples, point-wise data to grid (neuron example)
+
+% Gotchas
+% - Relying on `base` as an indicator whether or not an array owns memory
+% - Floating point precision
+%   * e.g. `arange` with fp step
+% - Casting esp. int -> float
+--><hr class="footnotes docutils" />
+<aside class="footnote-list brackets">
+<aside class="footnote brackets" id="id4" role="note">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">1</a><span class="fn-bracket">]</span></span>
+<p>Pun absolutely intended</p>
+</aside>
+</aside>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  <!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="index.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">BeBI 205 Guest Lecture: NumPy for Biological Image Analysis</p>
+      </div>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">NumPy for Biological Image Analysis</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bebi-205-may-11th-2023">BeBi 205, May 11th 2023</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ross-barnowski-rossbar-on-github">Ross Barnowski, @rossbar on GitHub</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#why-numpy">Why NumPy?</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-scientific-python-ecosystem">The Scientific Python Ecosystem</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#a-bit-of-history">A Bit of History</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#changing-landscape">Changing Landscape</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#google-trends">Google Trends</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#takeaways">Takeaways</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#numpy-array-at-a-glance">NumPy Array at a glance</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#key-concepts">Key concepts</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#the-strided-memory-model">The strided memory model</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example">Example</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#contiguous-memory">Contiguous Memory</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Example</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#question-is-it-possible-to-have-memory-layouts-that-are-neither-f-nor-c-contiguous">Question: Is it possible to have memory layouts that are neither F nor C contiguous?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#another-question-is-it-possible-to-have-non-contiguous-memory-in-2d">Another Question: Is it possible to have non-contiguous memory in 2D?</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#aside">Aside</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#the-power-of-the-strided-memory-model">The power of the strided memory model</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#some-caveats">Some caveats</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#contrived-example">Contrived example</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why">Why?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#slightly-less-contrived-example">(Slightly) less contrived example</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-indexing">Basic Indexing</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-tiling">Example: Tiling</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Why?</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#takeaways-from-tiling">Takeaways from tiling</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#advanced-indexing">Advanced indexing</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-julia-sets">Example: Julia sets</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#advanced-indexing-arrays-of-indices">Advanced Indexing: Arrays of indices</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mapping-points-to-coordinates">Mapping points to coordinates</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#miscellania">Miscellania</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#don-t-use-maskedarray">Don’t use <code class="docutils literal notranslate"><span class="pre">MaskedArray</span></code></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#don-t-use-np-matrix">Don’t use <code class="docutils literal notranslate"><span class="pre">np.matrix</span></code></a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-is-matrix-still-around">Why is <code class="docutils literal notranslate"><span class="pre">matrix</span></code> still around?</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#check-out-the-new-numpy-random-interface">Check out the “new” numpy.random interface</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#finding-the-right-tool-for-the-job">Finding the right tool for the job</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#don-t-forget-about-python-s-data-structures">Don’t forget about Python’s data structures!</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#trivial-example">Trivial example</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#takeaway">Takeaway</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#general-takeaways">General Takeaways</a></li>
+</ul>
+
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+  <div class="tocsection sourcelink">
+    <a href="_sources/presentation.md.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=ac02cc09edc035673794"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=ac02cc09edc035673794"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+  <p class="copyright">
+    
+      © Copyright 2023, Ross Barnowski (rossbar).
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.3.0.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item"><p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.14.1.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>
