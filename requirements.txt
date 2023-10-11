@@ -11,3 +11,4 @@ jupytext
 rise
 sphinx
 myst-nb
+pydata-sphinx-theme

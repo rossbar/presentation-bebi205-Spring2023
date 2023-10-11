@@ -5,7 +5,7 @@ jupytext:
     extension: .md
     format_name: myst
     format_version: 0.13
-    jupytext_version: 1.14.5
+    jupytext_version: 1.15.2
 kernelspec:
   display_name: Python 3 (ipykernel)
   language: python
@@ -49,7 +49,7 @@ import matplotlib.pyplot as plt
 
 ## The Scientific Python Ecosystem
 
-<img src="images/scientific_python_ecosystem.png" alt="scientific_python_ecosystem" width=40%/>
+<img src="images/scientific_python_ecosystem.png" alt="scientific_python_ecosystem" width=40% />
 
 </center>
 
@@ -244,8 +244,11 @@ homogenously-typed data on CPUs.
 +++ {"slideshow": {"slide_type": "subslide"}}
 
 <center>
-<img src="images/numpy_features.png" alt="Summary of NumPy array functionality"/>
+
+<img src="images/numpy_features.png" alt="Summary of NumPy array functionality" />
+
 </center>
+
 Image credit: Jarrod Millman et. al. - [Array programming with NumPy][numpy-paper]
 
 +++ {"slideshow": {"slide_type": "slide"}}
@@ -852,6 +855,7 @@ Could this be improved? How would you do it?
 A quirk:
 
 ```{code-cell} ipython3
+:tags: [raises-exception]
 tile_grid[0, :, ...] /= vmax
 ```
 
